@@ -1,0 +1,112 @@
+{% load static %}
+<head>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+</head>
+<body style="background-color:  #E0FFE0;">
+<div style="position:fixed;">
+        {% include 'menudealer.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'dealerheader.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: 10px;">
+
+    <div class="sufee-login d-flex align-content-center flex-wrap rounded">
+        <div class="container">
+            <div class="login-content rounded" style="box-shadow: 0 0 50px gray;"> 
+                <div class="login-form rounded">
+                    
+                    <h4 style="color: black;margin-top: -10px;margin-bottom: -5px;">Edit Profile</h4><hr>
+
+                    <form method="post" id="dealersedit" action="/dealer/updatedealerprofile/{{dealer.id}}/">
+                        {% csrf_token %}
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    NAME
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="name" value="{{dealer.name}}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    Location
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <textarea type="text" name="address" class="form-control">{{dealer.address}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    City
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="city" value="{{dealer.city}}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    State
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="state" value="{{dealer.state}}" class="form-control">
+                            </div>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30"><b>EDIT</b></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div style="margin-left: 218px;">   
+        {% include 'dealerfooter.html' %}
+    </div>
+
+
+<script>  
+    $(document).ready(function(){  
+        $("#dealersedit").validate({
+            rules: {
+                name: {
+                    required: true,
+                },
+                crop: {
+                    required: true,
+                },
+                rate: {
+                    required: true,
+                },
+                total_price: {
+                    required: true,
+                },
+            },
+            messages: {
+                name: {
+                    required: "select name"
+                },                        
+                crop: {
+                    required: "select crop "
+                },      
+                rate: {
+                    required: "select rate"
+                },
+                total_price: {
+                    required: "select total_price"
+                }
+            }  
+        });
+    }); 
+</script>

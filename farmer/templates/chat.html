@@ -1,0 +1,304 @@
+<!-- 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    /* CSS for circular voice icon */
+    #voice-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #2b3a24;
+        border: 1px solid #ccc;
+        box-shadow: white;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 9999; /* Ensure it's above other content */
+    }
+    #welcome-message {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #ccc;
+        display: block; /* Initially show welcome message */
+        z-index: 9998; /* Ensure it's above other content except the voice button */
+    }
+</style>
+</head>
+
+<body>
+<div id="voice-btn">
+    <i class="fas fa-microphone"></i> 
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+    var recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
+    var selectedLanguage = 'hi-IN'; // Default to Hindi
+    var userName = ''; // Placeholder for user's name, set this dynamically
+    var isBotActive = false; // Flag to track if the bot is active
+    var listeningForActivation = true; // Flag to track if the bot is listening for activation
+
+    // Function to start recognition
+    function startRecognition() {
+        recognition.lang = selectedLanguage;
+        recognition.start();
+    }
+
+    // Function to stop recognition
+    function stopRecognition() {
+        recognition.stop();
+    }
+
+    // Function to welcome user
+    function welcomeUser() {
+        var welcomeMessage = `एकिसान पर आपका स्वागत है ${userName}!Mera Naam Ekisan hai! मैं आपकी मदद कर सकती हूँ नेविगेट करने में जैसे profile, sales, bits on my products, myproducts, my bit history, weather`;
+        speak(welcomeMessage, function() {
+            isBotActive = true; // Set bot's state to active
+            listeningForActivation = false; // Stop listening for activation
+        });
+    }
+
+    // Function to handle user command
+    function handleUserCommand(userInput) {
+        $.ajax({
+            type: 'POST',
+            url: '/farmer/botpress_webhook_view/',  // Replace with your Django view URL
+            data: JSON.stringify({
+                user_input: userInput,
+                language: selectedLanguage
+            }),
+            contentType: 'application/json',
+            success: function(data) {
+                if (data && data.message) {
+                    var botResponse = data.message;
+                    speak(botResponse, function() {
+                        if (data.url) {
+                            window.location.href = data.url;
+                        }
+                    });
+                } else {
+                    console.error("Invalid or empty response format:", data);
+                    alert("Error: Invalid or empty response format.");
+                }
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = 'बॉट से संवाद करने में त्रुटि।';
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMessage = xhr.responseJSON.error;
+                }
+                speak(errorMessage);
+            }
+        });
+    }
+
+    // Function to say goodbye
+    function sayGoodbye() {
+        var goodbyeMessage = `अलविदा ${userName}! आपका दिन शुभ हो!`;
+        speak(goodbyeMessage, function() {
+            stopRecognition();
+            isBotActive = false; // Set bot's state to inactive
+            listeningForActivation = true; // Start listening for activation
+        });
+    }
+
+    // Function to speak
+    function speak(text, callback) {
+        stopRecognition(); // Stop recognition while speaking
+        var synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(text);
+        utterThis.lang = selectedLanguage;
+        utterThis.onend = function() {
+            startRecognition(); // Restart recognition after speaking
+            if (callback) {
+                callback();
+            }
+        };
+        utterThis.onerror = function(event) {
+            console.error('Speech synthesis error:', event.error);
+        };
+        synth.speak(utterThis);
+    }
+
+    // Function to provide page-specific instructions
+    function providePageInstructions() {
+        var path = window.location.pathname;
+        var instructions = '';
+
+        if (path === '/farmer/subscription/') {
+            instructions = 'सब्सक्रिप्शन! यहाँ आप अपनी सदस्यता देख सकते हैं और उसे बढ़ा सकते हैं।';
+        } else if (path === '/farmer/farmerprofile/') {
+            instructions = 'प्रोफ़ाइल! यहाँ आप अपनी प्रोफ़ाइल संपादित कर सकते हैं, अपनी सदस्यता बढ़ा सकते हैं, पासवर्ड बदल सकते हैं।';
+        } else if (path === '/farmer/sales/') {
+            instructions = 'बिक्री! यहाँ आप उत्पाद बेच सकते हैं।';
+        } else if (path === '/farmer/farmerbit/') {
+            instructions = 'मेरे उत्पादों पर बोलियां! यहाँ आप अपने उत्पादों पर डीलरों द्वारा किए गए बोलियां देख सकते हैं।';
+        } else if (path === '/farmer/productprice/') {
+            instructions = 'मेरे उत्पाद! यहाँ आप अपने उत्पाद देख सकते हैं।';
+        } else if (path === '/farmer/bithistory/') {
+            instructions = 'बोलियों का इतिहास! यहाँ आप अपने उत्पादों पर की गई बोलियों का इतिहास देख सकते हैं।';
+        } else if (path === '/farmer/getweather/') {
+            instructions = 'मौसम! यहाँ आप अपने शहर में दैनिक मौसम का अपडेट देख सकते हैं।';
+        }  else if (path.startsWith('/farmer/details/')) {
+            instructions = 'Details! यहाँ आपको डीलर की जानकारी मिलेगी।';
+        }  else if (path.startsWith('/farmer/editfarmerprofile/')) {
+            instructions = 'Edit Profile!  यहां आप अपनी प्रोफ़ाइल Edit कर सकते हैं।।';
+        } else {
+            instructions = 'आप इस पेज पर विभिन्न कार्य कर सकते हैं।';
+        }
+
+        speak(instructions);
+    }
+
+    // Recognition event handlers
+    recognition.onresult = function(event) {
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                var userInput = event.results[i][0].transcript.trim();
+                if (userInput.toLowerCase() === 'किसान' && listeningForActivation) {
+                    welcomeUser();
+                } else if (isBotActive) {
+                    handleUserCommand(userInput);
+                }
+            }
+        }
+    };
+
+    recognition.onerror = function(event) {
+        console.error('Speech recognition error:', event.error);
+        // speak('माफ़ करें, मैं इसे समझ नहीं पाई। कृपया पुनः प्रयास करें।');
+        startRecognition(); // Restart recognition after an error
+    };
+
+    recognition.onend = function() {
+        if (isBotActive || listeningForActivation) {
+            startRecognition(); // Restart recognition if bot should be active or listening for activation
+        }
+    };
+
+    // Function to fetch the username synchronously
+    function fetchUserName() {
+        $.ajax({
+            type: 'GET',
+            url: '/farmer/get_user_name/',  // Replace with your Django view URL
+            async: false,
+            success: function(data) {
+                if (data && data.user_name) {
+                    userName = data.user_name;
+                } else {
+                    console.error("Invalid or empty response format:", data);
+                    alert("Error: Invalid or empty response format.");
+                }
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = 'उपयोगकर्ता नाम प्राप्त करने में त्रुटि।';
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMessage = xhr.responseJSON.error;
+                }
+                alert(errorMessage);
+            }
+        });
+    }
+
+    // Simulate user login and logout
+    function simulateLogin() {
+        fetchUserName();
+        welcomeUser();
+        isBotActive = true; // Save bot's state as active
+        listeningForActivation = false; // Stop listening for activation
+        startRecognition(); // Start recognition
+    }
+
+    function simulateLogout() {
+        sayGoodbye();
+    }
+
+    // Activate bot on microphone button click
+    $('#voice-btn').click(function() {
+        speak('मैं आपकी किस प्रकार सहायता कर सकती हूँ?');
+    });
+
+    // Bind logout button click event to simulateLogout
+    $('#logout').click(function() {
+        simulateLogout();
+    });
+
+    // Activate bot on page load and provide instructions
+    window.addEventListener('load', function() {
+        if (localStorage.getItem('botActive') === 'true') {
+            isBotActive = true;
+            startRecognition();
+            providePageInstructions();
+        } else {
+            listeningForActivation = true;
+            startRecognition();
+        }
+    });
+
+    // Listen for page changes and provide instructions
+    $(window).on('popstate', function() {
+        providePageInstructions();
+    });
+
+    $(document).on('click', 'a', function() {
+        setTimeout(providePageInstructions, 1000);
+    });
+});
+</script>
+
+
+
+    <script src="{% static 'node_modules/intro.js/minified/intro.min.js' %}"></script>
+    <script>
+        function startChatTutorial() {
+            introJs().setOptions({
+                steps: [
+                    {
+                        element: '#voice-btn',
+                        intro: "Here you can give voice commands from this button.<br>इस बटन से आप वॉयस कमांड दे सकते हैं।<br>या बटणावरून तुम्ही व्हॉइस कमांड देऊ शकता।<br>اس بٹن سے آپ وائس کمانڈ دے سکتے ہیں"
+                    },
+                ]
+            }).start();
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (isFirstTimeUser()) {
+                startChatTutorial();
+            }
+        });
+
+        function isFirstTimeUser() {
+            return localStorage.getItem('firstTimeUser') === null;
+        }
+
+        function markTutorialAsSeen() {
+            localStorage.setItem('firstTimeUser', 'false');
+        }
+
+        introJs().oncomplete(() => {
+            markTutorialAsSeen();
+        }).onexit(() => {
+            markTutorialAsSeen();
+        });
+    </script>
+
+</body>
+</html> -->

@@ -1,0 +1,182 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-KISAN | Dealer</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/fav.png' %}" id="favicon">
+    
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"> </script>
+    <script>
+        function calculateEpay(bitValue, quantity) {
+            return (bitValue * quantity * 2 / 100).toFixed(2);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const bitRows = document.querySelectorAll(".bit-row");
+            bitRows.forEach(row => {
+                const bitId = parseFloat(row.dataset.bitId);
+                const bitValue = parseFloat(row.dataset.bitValue);
+                const quantity = parseFloat(row.dataset.quantity);
+                const epay = calculateEpay(bitValue, quantity);
+                row.querySelector(".epay").textContent = `${epay} Rs`;
+            });
+
+            if (bitRows.length > 0) {
+                const firstRow = bitRows[0];
+                const bitId = parseFloat(firstRow.dataset.bitId);
+                const bitValue = parseFloat(firstRow.dataset.bitValue);
+                const quantity = parseFloat(firstRow.dataset.quantity);
+                const epay = calculateEpay(bitValue, quantity) * 100; 
+
+                var options = {
+                    "key": "rzp_test_bX75Gd98qBwkpY", 
+                    "amount": epay, 
+                    "currency": "INR",
+                    "name": "EKISAN",
+                    "description": "Subscription",
+                    "image": "/static/images/fav.png",
+                    "order_id": "{{ payment.id }}", 
+                    "handler": function (response) {
+                        window.location.href = `http://localhost:8000/dealer/payment_success/{{ payment.id }}/${response.razorpay_payment_id}/${response.razorpay_order_id}/${response.razorpay_signature}/${epay}/${bitId}/`;            
+                    },
+                    "theme": {
+                        "color": "#3399cc"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response) {
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+                });
+                document.getElementById('pay').onclick = function (e) {
+                    rzp1.open();
+                    e.preventDefault();
+                }
+            }
+        });
+    </script>
+
+</head>
+
+<body style="background-color:  #E0FFE0;">
+    
+    <div style="position:fixed;">
+        {% include 'menudealer.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'dealerheader.html' %}  
+    </div>
+
+    <div class="container mt-5" style="margin-left: 240px;width: 1020px;">
+        {% for bit in bits %}
+        <div class="card bg-white p-4" style="margin-top: 70px;margin-left: 225px; width: 575px;height: 450px;box-shadow: 0 0 20px gray;">
+            
+            <h4>Bit no {{bit.id}}, Payment Details</h4>
+            <hr>
+            
+            <table>
+                <tr>
+                    <td>Delivery Address:</td>
+                    <td>{{bit.bitter_address}}</td>
+                </tr>
+                <tr>
+                    <td>Dealer Name:</td>
+                    <td>{{bit.bitter}}</td>
+                </tr>
+                <tr>
+                    <td>Farmer Name:</td>
+                    <td>{{bit.farmer}}</td>
+                </tr>
+                <tr>
+                    <td>Product Name:</td>
+                    <td>{{bit.product}}</td>
+                </tr>
+                <tr>
+                    <td>Product Quality:</td>
+                    <td>{{bit.quality}}</td>
+                </tr>
+                <tr>
+                    <td>Your Bit:</td>
+                    <td>{{bit.bit_value}} Rs</td>
+                </tr>
+                <tr>
+                    <td>Product quantity:</td>
+                    <td>{{bit.quantity}} </td>
+                </tr>
+                
+                <tr>    
+                    <td>Product Price:</td>
+                    <td>{{bit.rate}} Rs</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr class="bit-row" data-bit-id="{{ bit.id }}" data-bit-value="{{ bit.bit_value }}" data-quantity="{{ bit.quantity }}">
+                    <td>
+                        <span style="font-family: Comic Sans MS, cursive, sans-serif;font-weight:  bold;">EKISAN Charges:</span>
+                    </td>
+                    <td class="epay" style="font-weight: bold;"></td>
+                </tr>
+                <tr class="bit-row" data-bit-id="{{ bit.id }}" data-bit-value="{{ bit.bit_value }}" data-quantity="{{ bit.quantity }}">
+                    <td colspan="2">
+                        <span class="text-success" style="font-family: Comic Sans MS, cursive, sans-serif;font-weight:  bold;">
+                            {{bit.bitter}} pay <span class="epay"></span> to give your address to {{bit.farmer}} 
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><button id="pay" class="btn btn-success rounded">Pay</button></td>
+                </tr>
+            </table>
+            
+        </div>
+        {% empty %}
+    <div> 
+        <div class="card bg-white p-4" style="margin-top: 70px;margin-left: 225px; width: 575px;height: 450px;box-shadow: 0 0 20px gray;">
+            
+            <h3 class="text-success p-5" style="font-family: Comic Sans MS, cursive, sans-serif;">{{user_name}},<br><br>You have Paid for this Product. <br><br> Thank You!</h3>
+            <a href="/dealer/mybits/" style="margin-left: 460px;"><button class="btn btn-primary rounded">Back</button></a>
+        </div>    
+    </div>
+    {% endfor %}
+    </div>
+    
+    <div style="margin-left: 218px;">   
+        {% include 'dealerfooter.html' %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+</body>
+
+</html>

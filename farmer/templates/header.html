@@ -1,0 +1,177 @@
+{% load static %}
+<html>
+<head>
+    <title>Ekisan | Farmer</title>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+    <link rel="stylesheet" href="{% static 'node_modules/intro.js/minified/introjs.min.css' %}">
+
+<style>
+        @media only screen and (max-width: 600px) {
+                
+                .header{
+                        background-color: rgb(26, 39, 26);
+                        height: 40px;
+                        top:0; 
+                        z-index:1;
+                        
+                }
+        }
+        @media only screen and (min-width: 1024px) {
+                
+                .header{
+                        margin-left: 2px;
+                        width:1055px;
+                        background-color: rgb(26, 39, 26);
+                        position:fixed;
+                        top:0;
+                        height: 40px; 
+                        z-index:1;
+                }
+        }
+</style>  
+<style>
+        /* Style the translate dropdown */
+        #google_element .goog-te-combo {
+            background-color: #f0f0f0; /* Background color */
+            color: #333; /* Text color */
+            padding: 5px; /* Padding */
+            border-radius: 5px; /* Rounded corners */
+            border: 1px solid #ccc; /* Border color */
+            font-size: 14px; /* Font size */
+        }
+
+        /* Hide the Google branding */
+        .goog-logo-link {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            color: transparent !important;
+        }
+
+        .goog-te-gadget .goog-te-combo {
+            color: #333 !important;
+        }
+
+        /* Hide the Google iframe banner */
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            border-radius: 10px;
+            background-color: lightgreen;
+            font-weight: bold;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            width: 220px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: black;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: rgb(26, 39, 26);
+        }
+    </style>
+<script async src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script> 
+<script>
+    function loadGoogleTranslate(){
+      new google.translate.TranslateElement({pageLanguage: 'en'},"google_element");
+    }
+  </script>
+</head>
+<body>
+    <div class="right-panel" style="height: 100px;">
+        <header class="header" style="background-color: rgb(26, 39, 26);width: 1065px;box-shadow: 0 0 5px lightgreen;">
+            <div class="dropdown" style="margin-top:-13px;">
+                <button class="btn btn-success rounded dropbtn" style="height: 34px;" type="button" id="dropdownMenuButton">
+                    {% if not profilepic %}
+                        <img id="profile-pic" src="{% static 'images/profilepic.png' %}" style="width: 30px; height: 30px; border-radius: 50%;margin-top:-10px;" alt="Profile Picture">
+                    {% else %}
+                        <img src="/static/images/frame.jpg" style="width: 35px; height: 35px; border-radius: 50%;margin-top: -6px;margin-left: -2px;" alt="Frame">
+                        <img src="/media/{{ profilepic.profilepic }}" style="position: absolute; left: 12px; top: 2px; width: 32px; height: 32px; border-radius: 50%;" alt="Profile Picture">
+                    {% endif %}
+                    <b style="margin-top: -10px;font-family:Comic Sans MS, cursive, sans-serif;">{{ user_name | upper }}</b>
+                </button>
+            <span class="text-white bg-success p-2 rounded"
+                style="font-family: Cosmic MS, cursive, sans-serif; margin-left: 320px;">
+                <span class="text-white">
+                    Total: {% if max_products_allowed > 999999 %} Unlimited Products Allowed {% else %} {{ max_products_allowed }} Products Allowed {% endif %} |
+                    Can Add: {% if remaining_chances > 999999 %} Unlimited Products {% else %} {{ remaining_chances }} Products {% endif %}
+                </span>
+            </span>
+
+                <div class="dropdown-content">
+                    <a href="/farmer/farmerprofile/"><span style="font-family: Comic Sans MS, cursive, sans-serif;">Profile</span></a>
+                    <a href="/settings/">Settings</a>
+                    <a href="/logout/">Logout</a>
+                </div>
+                
+            </div>
+    
+            <!-- <div id="google_element" class="form-control" style="background-color: #2b3a24;width: 250px;height: 60px;margin-left: 750px;margin-top: -35px;"></div> -->
+        </header>     
+    </div> 
+
+    <script src="{% static 'node_modules/intro.js/minified/intro.min.js' %}"></script>
+    <script>
+        // function startHeaderTutorial() {
+        //     introJs().setOptions({
+        //         steps: [
+        //             {
+        //                 element: '#google_element',
+        //                 intro: "Here you can change the website language.<br>यहाँ आप वेबसाइट की भाषा बदल सकते हैं।<br>येथे आपण वेबसाइटची भाषा बदलू शकता.<br>یہاں آپ ویب سائٹ کی زبان تبدیل کر سکتے ہیں"
+        //             },
+        //         ]
+        //     }).start();
+        // }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (isFirstTimeUser()) {
+                startHeaderTutorial();
+            }
+        });
+
+        function isFirstTimeUser() {
+            return localStorage.getItem('firstTimeUser') === null;
+        }
+
+        function markTutorialAsSeen() {
+            localStorage.setItem('firstTimeUser', 'false');
+        }
+
+        introJs().oncomplete(() => {
+            markTutorialAsSeen();
+        }).onexit(() => {
+            markTutorialAsSeen();
+        });
+    </script>
+</body>
+</html>

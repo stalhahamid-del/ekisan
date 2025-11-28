@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>EKISAN Admin</title>
+
+<link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'bower_components/Ionicons/css/ionicons.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'bower_components/jvectormap/jquery-jvectormap.css' %}">
+
+<link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'dist/css/skins/_all-skins.min.css' %}">
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<script nonce="e1f6f06c-5dcc-495e-91a5-bba0ff97e772">try{(function(w,d){!function(o,p,q,r){o[q]=o[q]||{};o[q].executed=[];o.zaraz={deferred:[],listeners:[]};o.zaraz.q=[];o.zaraz._f=function(s){return async function(){var t=Array.prototype.slice.call(arguments);o.zaraz.q.push({m:s,a:t})}};for(const u of["track","set","debug"])o.zaraz[u]=o.zaraz._f(u);o.zaraz.init=()=>{var v=p.getElementsByTagName(r)[0],w=p.createElement(r),x=p.getElementsByTagName("title")[0];x&&(o[q].t=p.getElementsByTagName("title")[0].text);o[q].x=Math.random();o[q].w=o.screen.width;o[q].h=o.screen.height;o[q].j=o.innerHeight;o[q].e=o.innerWidth;o[q].l=o.location.href;o[q].r=p.referrer;o[q].k=o.screen.colorDepth;o[q].n=p.characterSet;o[q].o=(new Date).getTimezoneOffset();if(o.dataLayer)for(const B of Object.entries(Object.entries(dataLayer).reduce(((C,D)=>({...C[1],...D[1]})),{})))zaraz.set(B[0],B[1],{scope:"page"});o[q].q=[];for(;o.zaraz.q.length;){const E=o.zaraz.q.shift();o[q].q.push(E)}w.defer=!0;for(const F of[localStorage,sessionStorage])Object.keys(F||{}).filter((H=>H.startsWith("_zaraz_"))).forEach((G=>{try{o[q]["z_"+G.slice(7)]=JSON.parse(F.getItem(G))}catch{o[q]["z_"+G.slice(7)]=F.getItem(G)}}));w.referrerPolicy="origin";w.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(o[q])));v.parentNode.insertBefore(w,v)};["complete","interactive"].includes(p.readyState)?zaraz.init():o.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document)}catch(e){throw fetch("/cdn-cgi/zaraz/t"),e;};</script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    
+<div class="wrapper">
+
+<header class="main-header">
+{% include 'header_admin.html' %}
+</header>
+
+{% include 'menu_admin.html' %}
+
+
+<div class="content-wrapper" style="height: 700px;">
+    <br><br>
+    
+    <div class="container mt-5">
+        <br><br>
+        <div id="message-div"></div>
+        <div id="message-div-dealer"></div>
+        <br>
+        <!-- Cards for counts -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card text-white btn btn-success mb-3" style="width: 200px;padding: 14px;margin-left: 50px;box-shadow: 0 0 18px gray;">
+                    <div class="card-header"><h4>Farmers</h4></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ farmer_count }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                    <div class="card text-white btn btn-primary mb-3" style="width: 200px;padding: 14px;box-shadow: 0 0 18px gray;">
+                    <div class="card-header"><h4 style="margin-left: 0px;">Dealers</h4></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ dealer_count }}</h5>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white btn btn-danger mb-3" style="width: 200px;padding: 14px;margin-left: -50px;box-shadow: 0 0 18px gray;">
+                    <div class="card-header"><h4>Products</h4></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product_count }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white btn btn-warning mb-3" style="width: 200px;padding: 14px;margin-left: -100px;box-shadow: 0 0 18px gray;">
+                    <div class="card-header"><h4>Subscriptions</h4></div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ subscription_count }}</h5>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </div>
+        <br><br>
+    <div class="card mb-4">
+            <div class="card-body">
+                <div class="accordion" id="productAccordion">
+                  <table class="table table-bordered" style="background-color: lightcyan;width: 900px;margin-left: 70px;box-shadow: 0 0 8px gray;">
+                      <thead class="thead-dark">
+                          <tr style="color: lightcoral;">
+                              <th>Product Type</th>
+                              <th>Quality</th>
+                              <th>Rate</th>
+                              <th>Quantity</th>
+                              <th>Bit Value</th>
+                              <th>Bitter</th>
+                              <th>Bitter Address</th>
+                              <th>Created At</th>
+                              <th>Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- Accepted Bits -->
+                          {% for bit in bits %}
+                          <tr class="table-success">
+                              <td>{{ bit.product_type }}</td>
+                              <td>{{ bit.quality }}</td>
+                              <td>{{ bit.rate }}</td>
+                              <td>{{ bit.quantity }}</td>
+                              <td>{{ bit.bit_value }}</td>
+                              <td>{{ bit.bitter }}</td>
+                              <td>{{ bit.bitter_address }}</td>
+                              <td>{{ bit.created_at }}</td>
+                              <td style="color: green;">Accepted</td>
+                          </tr>
+                          {% endfor %}
+
+                      </tbody>
+                  </table>
+                </div>
+          </div>
+    </div>
+</div>
+
+<br><br>
+
+<footer class="footer" style="width: 1300px;margin-top: -50px;">
+{% include 'footer_admin.html' %}
+</footer>
+
+
+</div>
+
+
+
+<script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script>
+<script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+
+<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'bower_components/fastclick/lib/fastclick.js' %}"></script>
+
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+
+<script src="{% static 'bower_components/jquery-sparkline/dist/jquery.sparkline.min.js' %}"></script>
+
+<script src="{% static 'plugins/jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script src="{% static 'plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+
+<script src="{% static 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'bower_components/chart.js/Chart.js' %}"></script>
+
+<script src="{% static 'dist/js/pages/dashboard2.js' %}"></script>
+
+<script src="{% static 'dist/js/demo.js' %}"></script>
+</body>
+
+</html>
+
+
+
+
+

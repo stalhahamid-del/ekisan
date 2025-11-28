@@ -1,0 +1,80 @@
+<body style="background-color:  #E0FFE0;">
+
+    <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -50px;">
+        <br><br>
+        <a href="/farmer/bithistory/"><button class="btn btn-primary rounded" style="margin-left: 900px;">Back</button></a>
+        <div class="card mt-3" style="width: 700px;margin-left: 125px;box-shadow: 0 0 50px gray;">
+            <div class="card-header" style="background-color: aliceblue;">
+                <h3 style="font-family: 'Comic Sans MS', cursive, sans-serif;">{{detail.name}}</h3>
+            </div>
+            <div class="card-body">
+                {% if paid %}
+                <table width="600px" style="margin-left: 100px;">
+                    <tr><td><b>Mobile</b>:</td><td>{{detail.mobile}}</td></tr>
+                    <tr><td><b>State</b>:</td><td>{{detail.state}}</td></tr>
+                    <tr><td><b>City</b>:</td><td>{{detail.city}}</td></tr>
+                    <tr><td><b>Address</b>:</td><td>{{detail.address}}</td></tr>
+                </table>
+                {% endif %}
+                {% if not paid %}
+                <table width="600px" style="margin-left: 100px;">
+                    <tr><td><b>Mobile</b>:</td><td>*******</td></tr>
+                    <tr><td><b>State</b>:</td><td>*******</td></tr>
+                    <tr><td><b>City</b>:</td><td>*******</td></tr>
+                    <tr><td><b>Address</b>:</td><td>*******</td></tr>
+                </table>
+                
+                    <button class="btn btn-primary rounded" id="rzp-button1" style="margin-left: 600px;">Pay</button>
+                {% endif %}
+            </div>
+        </div>        
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "rzp_test_bX75Gd98qBwkpY", // Enter the Key ID generated from the Dashboard
+            "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "EKisan",
+            "description": "Subsription",
+            "image": "https://example.com/your_logo",
+            "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the id obtained in the response of Step 1
+            "handler": function (response) {
+                window.location.href = `http://localhost:8000/farmer/paid/{{ payment.amount }}/{{ payment.id }}/${response.razorpay_payment_id}/${response.razorpay_order_id}/${response.razorpay_signature}/`;
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+        });
+        document.getElementById('rzp-button1').onclick = function (e) {
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+
+         <div style="margin-left: 218px;">   
+            {% include 'chat.html' %}
+            {% include 'footer.html' %}
+        <div>
+</body>

@@ -1,0 +1,242 @@
+ {% load static %} 
+<html class="no-js" lang=""> 
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EKISAN | Farmer</title>
+    <meta name="description" content="E-KISAN Kid-friendly Platform">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Comic+Sans+MS:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Comic+Sans+MS:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var currentPath = window.location.pathname;
+            var menuItems = document.querySelectorAll(".nav.navbar-nav li");
+
+            menuItems.forEach(function(item) {
+              var link = item.querySelector("a");
+            if (link.getAttribute("href") === currentPath) {
+              item.classList.add("nav-item-active");
+              }
+          });
+    });
+
+  </script>
+  
+<style>
+  /* Sidebar styles */
+  #toggle-button {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  #left-panel {
+    background-color: rgb(26, 39, 26);
+  }
+
+  #left-panel a {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    /* Adjusted padding */
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin-left: -30px;
+    width: 200px;
+  }
+
+  #left-panel.active {
+    left: -200px;
+  }
+
+  #left-panel a:hover {
+    color: #007bff;
+  }
+
+  /* Active link styles */
+  .nav-item-active {
+    background-color: #28a745;
+    color: white;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  /* Main content styles */
+  .main-content {
+    padding-left: 200px;
+  }
+
+  /* Toggle button styles (optional) */
+  #toggle-button {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* Menu styles */
+  #main-menu {
+    display: block;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #left-panel {
+      background-color: rgb(26, 39, 26);
+      position: fixed;
+      width: 200px;
+      height: 100%;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      transition: 0.5s;
+      color: white;
+    }
+
+    #left-panel.active {
+      left: -200px;
+    }
+
+    .main-content {
+      padding-left: 0;
+    }
+
+    #main-menu.show {
+      display: none;
+    }
+
+    #toggle-button {
+      display: block;
+    }
+  }
+</style>
+
+</head>
+
+<body>
+
+    <aside id="left-panel" class="left-panel" style="width: 200px;">
+
+        <button id="toggle-button" style="color: white;background-color: black; margin-left: 205px;font-size: 20px;border-radius: 15px;padding: 5px;">&raquo;</button>
+
+        <nav class="navbar navbar-expand-sm navbar-default" style="background-color: rgb(26, 39, 26);">
+            
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="/static/images/fav.png" style="width: 50px;height: 50px;"><span  style="font-size: 30px;color: rgb(119, 176, 121);"> EKISAN</span></a>
+            </div>
+           
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="profile" style="margin-top: 10px;"><a href="/farmer/farmerprofile/"><i class="fa fa-user"></i> &nbsp; <span style="margin-left: 10px;">Profile</span></a></li>
+                    <li id="sales" style="margin-top: 10px;"><a href="/farmer/sales/"><i class="fa fa-line-chart"></i> &nbsp; <span style="margin-left: 10px;">Sell</span></a></li>
+                    <li id="bitsonmyproducts" style="margin-top: 10px;"><a href="/farmer/farmerbit/"><i class="fa fa-cubes"></i> &nbsp; <span style="margin-left: 10px;">My Bits</span></a></li>
+                    <li id="myproducts" style="margin-top: 10px;"><a href="/farmer/productprice/"><i class="fa fa-list"></i>&nbsp; <span style="margin-left: 10px;">My Products</span></a></li>
+                    <li id="mybithistory" style="margin-top: 10px;"><a href="/farmer/bithistory/"><i class="fa fa-history"></i>&nbsp; <span style="margin-left: 10px;">Bit History</span></a></li>
+                    <li id="weather" style="margin-top: 10px;"><a href="/farmer/getweather/"><i class="fa fa-cloud"></i>&nbsp;<i style="margin-left: 10px;"> Weather</i></a></li>
+                    <li><a href="/logout/" style="margin-top: 10px;"><i class="fa fa-sign-out"></i>&nbsp; <span style="margin-left: 10px;">Logout</span></a></li>
+                 </ul>
+            </div>
+
+        </nav>
+
+    </aside>
+
+<script>
+  const toggleButton = document.getElementById('toggle-button');
+  const leftPanel = document.getElementById('left-panel');
+
+  toggleButton.addEventListener('click', () => {
+    leftPanel.classList.toggle('active');
+
+    if (leftPanel.classList.contains('active')) {
+      toggleButton.style.marginLeft = '0px';
+    } else {
+      toggleButton.style.marginLeft = '205px'; 
+    }
+  });
+</script>
+
+
+
+<script src="{% static 'node_modules/intro.js/minified/intro.min.js' %}"></script>
+    <script>
+        function startMenuTutorial() {
+            introJs().setOptions({
+                steps: [
+                    {
+                        intro: "Welcome to eKisan! Let's take a quick tour.<br>ईकिसान में आपका स्वागत है! आइए, एक त्वरित दौरा करते हैं।<br>ईकिसानमध्ये आपले स्वागत आहे! चला, एक त्वरित फेरफटका मारूया.<br>میں خوش آمدید! آئیے، ایک تیز دورہ کرتے ہیں"
+                    },
+                    {
+                        element: '#profile',
+                        intro: "This is your profile where you can see your personal details and subsription details here.<br>यह आपकी प्रोफाइल है जहाँ आप अपनी व्यक्तिगत जानकारी और सदस्यता विवरण देख सकते हैं।<br>हे तुमचे प्रोफाइल आहे जिथे तुम्ही तुमची वैयक्तिक माहिती आणि सदस्यता तपशील पाहू शकता.<br>یہ آپ کی پروفائل ہے جہاں آپ اپنی ذاتی تفصیلات اور سبسکرپشن کی تفصیلات دیکھ سکتے ہیں"
+                    },
+                    {
+                        element: '#sales',
+                        intro: "Here you can sale your products.<br>यहाँ आप अपने उत्पाद बेच सकते हैं।<br>येथे आपण आपली उत्पादने विकू शकता.<br>یہاں آپ اپنی مصنوعات فروخت کر سکتے ہیں"
+                    },  
+                    {
+                        element: '#bitsonmyproducts',
+                        intro: "Here you can see the list of bits of dealers on your products.<br>यहाँ आप अपने उत्पादों पर डीलरों से प्राप्त बोलियों की सूची देख सकते हैं।<br>येथे आपण आपल्या उत्पादनांवर डीलरकडून आलेल्या बोलींची यादी पाहू शकता.<br>یہاں آپ اپنے مصنوعات پر ڈیلرز کی جانب سے دی گئی بولیوں کی فہرست دیکھ سکتے ہیں۔"
+                    },
+                    {
+                        element: '#myproducts',
+                        intro: "Here you can see the list of your products.<br>यहाँ आप अपने उत्पादों की सूची देख सकते हैं।<br> येथे आपण आपल्या उत्पादनांची यादी पाहू शकता.<br>یہاں آپ اپنے مصنوعات کی فہرست دیکھ سکتے ہیں"
+                    },
+                    {
+                        element: '#mybithistory',
+                        intro: "Here you can see all the history of your bits on products.<br>यहाँ आप अपने उत्पादों पर सभी बोलियों का इतिहास देख सकते हैं।<br>येथे आपण आपल्या उत्पादनांवरील सर्व बोलींचा इतिहास पाहू शकता.<br>یہاں آپ اپنی مصنوعات پر دی گئی تمام بولیوں کی تاریخ دیکھ سکتے ہیں"
+                    },
+                    {
+                        element: '#weather',
+                        intro: "Here you can see the weather updates.<br>यहाँ आप मौसम के अपडेट देख सकते हैं।<br>येथे आपण हवामानाचे अद्यतने पाहू शकता.<br>یہاں آپ موسم کی تازہ ترین معلومات دیکھ سکتے ہیں"
+                    },
+
+                ]
+            }).start();
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (isFirstTimeUser()) {
+                startMenuTutorial();
+            }
+        });
+
+        function isFirstTimeUser() {
+            return localStorage.getItem('firstTimeUser') === null;
+        }
+
+        function markTutorialAsSeen() {
+            localStorage.setItem('firstTimeUser', 'false');
+        }
+
+        introJs().oncomplete(() => {
+            markTutorialAsSeen();
+        }).onexit(() => {
+            markTutorialAsSeen();
+        });
+    </script>
+
+</body>

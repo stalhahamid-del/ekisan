@@ -1,0 +1,43 @@
+{% load static %}  
+        <script src="{% static 'assets/js/lib/chart-js/Chart.bundle.js' %}"></script>
+        <script src="{% static 'assets/js/dashboard.js' %}"></script>
+        <script src="{% static 'assets/js/widgets.js' %}"></script>
+        <script src="{% static 'assets/js/lib/vector-map/jquery.vmap.js' %}"></script>
+        <script src="{% static 'assets/js/lib/vector-map/jquery.vmap.min.js' %}"></script>
+        <script src="{% static 'assets/js/lib/vector-map/jquery.vmap.sampledata.js' %}"></script>
+        <script src="{% static 'assets/js/lib/vector-map/country/jquery.vmap.world.js' %}"></script>
+<style>
+        @media only screen and (max-width: 600px) {
+                .footer{
+                        text-align: center; 
+                        background-color: rgb(26, 39, 26);
+                        height: 40px; 
+                        padding-top: 8px;
+                        width: 375px;
+                        margin-left: 0px;
+                        position:fixed;
+                        bottom:0;
+                }
+        }
+        @media only screen and (min-width: 1024px) {
+                .footer{
+                        text-align: center; 
+                        background-color: rgb(26, 39, 26);
+                        height: 40px; 
+                        padding-top: 8px;
+                        width: 1065px;
+                        margin-left: 2px;
+                        position:fixed;
+                        bottom:0;
+                }
+        }
+</style>        
+        
+<div class="footer shadow-lg" style="box-shadow: 0 0 5px lightgreen;">
+        
+        <strong style="color: white;font-family: 'Comic Sans MS', cursive, sans-serif;">Copyright &copy; 2024 <span style="color: rgb(119, 176, 121);font-family: 'Comic Sans MS', cursive, sans-serif;">EKISAN</span>.</strong> 
+        <span style="color: white;font-family: 'Comic Sans MS', cursive, sans-serif;">All rights reserved.</span>
+</div>
+    </body>
+    </html>
+  

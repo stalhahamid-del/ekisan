@@ -1,0 +1,379 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EKISAN | Home</title>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+
+    <meta name="description" content="Kid-friendly EKISAN platform">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+    body {
+        background-color: #E0FFE0;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .navbar {
+        background-color: rgb(26, 39, 26);
+    }
+
+    .navbar-brand,
+    .nav-link {
+        color: white !important;
+        font-size: 1.2em;
+    }
+
+    .navbar-toggler-icon {
+        filter: invert(1);
+    }
+
+    .card {
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body img {
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .card-footer {
+        text-align: center;
+    }
+
+    .slider-container {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slider-controls button {
+        background-color: transparent;
+        border: none;
+        font-size: 2em;
+        cursor: pointer;
+    }
+
+    .footer {
+        background-color: rgb(26, 39, 26);
+        color: white;
+    }
+
+    .footer a {
+        color: white;
+    }
+
+    .footer hr {
+        border-top: 1px solid white;
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive Styles */
+    /* Responsive Styles */
+@media (max-width: 1200px) {
+    .slider-container {
+        width: 100%;
+    }
+
+    .MoreCard {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .MoreCard {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+    }
+}
+
+@media (max-width: 768px) {
+    .MoreCard {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 576px) {
+    .MoreCard {
+        flex: 0 0 100%;
+        max-width: 100%;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slider-container {
+        overflow: hidden;
+    }
+
+    .slider-controls button {
+        font-size: 1.5em;
+    }
+}
+
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/"><img src="/static/images/fav.png" style="width: 30px;height: 30px;"> EKISAN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/termsandconditons/">
+                        Terms And Conditions
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/privacypolicy/">
+                        Privacy Policy
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/aboutus/">
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/index/">
+                         Sign In
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register/">
+                         Sign Up
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Farmers Slider -->
+    <div class="container">
+        <div class="card mt-5">
+        <div class="card-header mb-3" style="background-color: #2b3a24;">
+            <h2 class="text-center text-white">Our Latest Farmers</h2>
+        </div>
+
+        <div class="card-body p-5">
+        <div class="row">
+            
+            {% for key,value in profilepic.items %}            
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <div class="card text-center bg-success" style="height: 225px;">
+                         <div class="card-body">
+                                {% if value.profilepic %}
+                                    <img class="card-img-top" src="/media/{{ value.profilepic }}" style="height: 80px; width: 80px;">
+                                {% else %}
+                                    <img class="card-img-top" src="{% static 'images/profile-picture.webp' %}" alt="Default Profile Picture" style="height: 80px; width: 80px;">
+                                {% endif %}
+                            <h5 class="card-title">{{ key }}</h5>
+                            <p class="card-text">{{ key.city }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-md-12 p-5">
+                    <h4>Be the first to register as a Farmer on 
+                        <span style="font-size: 19px;color: rgb(119, 176, 121);font-weight: bold;">
+                            <img src="/static/images/fav.png" width="30" height="30">EKISAN
+                        </span>.
+                    </h4>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>    
+    </div>
+
+    <!-- Dealers Slider -->
+    <div class="container">
+        <div class="card mt-5">
+        <div class="card-header mb-3" style="background-color: #2b3a24;">
+        <h2 class="text-center text-white">Our Latest Dealers</h2>
+        </div>
+        <div class="card-body p-5"> 
+        <div class="row">
+            {% for key,value in dealerprofilepic.items %}            
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <div class="card text-center rounded">
+                        <div class="card-body bg-danger rounded" style="height: 225px;">
+                                {% if value.profilepic %}
+                                    <img class="card-img-top" src="/media/{{ value.profilepic }}" style="height: 80px; width: 80px;">
+                                {% else %}
+                                    <img class="card-img-top" src="{% static 'images/profile-picture.webp' %}" alt="Default Profile Picture" style="height: 80px; width: 80px;">
+                                {% endif %}
+                            <h5 class="card-title">{{ key }}</h5>
+                            <p class="card-text">{{ key.city }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-md-12 p-5">
+                    <h4>Be the first to register as a Dealer on
+                        <span style="font-size: 19px;color: rgb(119, 176, 121);font-weight: bold;">
+                            <img src="/static/images/fav.png" width="30" height="30">EKISAN
+                        </span>.
+                    </h4>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+     </div>   
+    </div>
+
+    <!-- Latest Deals -->
+    <div class="container">
+        <div class="card mt-5">
+        <div class="card-header mb-3" style="background-color: #2b3a24;">
+        <h2 class="text-center text-white">Latest Deals</h2>
+        </div>
+        <div class="card-body p-5"> 
+        <div class="row">
+            {% for latest_message in latest_messages %}
+            <div class="col-sm-6 col-md-4">
+                <div class="card text-center text-white" style="background-color: #2b3a24;">
+                    <div class="card-body">
+                        <p class="msg">{{ latest_message.user }} : {{ latest_message.notification }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-md-12 p-5">
+                <h4>Be the first to make deal on
+                    <span style="font-size: 19px;color: rgb(119, 176, 121);font-weight: bold;">
+                        <img src="/static/images/fav.png" width="30" height="30">EKISAN
+                    </span>.
+                </h4>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Available Products -->
+    <div class="slider-controls">
+        <div class="container">
+         <div class="card mt-5">
+            
+            <div class="card-header mb-3" style="background-color: #2b3a24;">
+                <h2 class="text-center text-white">All Available Products</h2>
+            </div>
+
+        <div class="card-body p-5">
+            <div class="slider-container p-5" style="margin-left: -80px; width: 1200px; overflow: hidden;">
+                <div class="slider" style="display: flex; transition: transform 0.5s ease;">
+                    {% for product, info in product_crops_dict.items %}
+                    <div class="MoreCard ml-4" style="flex: 0 0 20%; max-width: 20%; box-sizing: border-box;">
+                        <div class="card text-center bg-warning">
+                            <div class="card-body">
+                                {% if info.crops|length > 0 %}
+                                <img class="card-img-top" src="/media/{{ info.crops.0.image }}"
+                                    alt="{{ info.crops.0.nameineng }}" style="height: 80px; width: 80px;">
+                                {% else %}
+                                <img class="card-img-top" src="https://via.placeholder.com/150" alt="{{ product }}"
+                                    style="height: 80px; width: 80px;">
+                                {% endif %}
+                                <h5 class="card-title">{{ product }}</h5>
+                                <p class="card-text">Total Quantity: {{ info.product_info.total_quantity }}</p>
+                                <p class="card-text">Total Rate: {{ info.product_info.total_rate }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if product_crops_dict.items|length > 5 %}
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+            {% endif %}
+        </div>
+
+
+
+         </div>   
+        </div>
+    </div>
+
+    <footer class="footer mt-5" style="background-color: rgb(26, 39, 26);margin-top: 50px;">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-2">
+                    <h4 class="text-white"><img src="/static/images/fav.png" style="width: 30px;height: 30px;text-decoration: none;"> EKISAN</h4>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white">Contact Us</h5><hr class="bg-light">
+                    <p class="text-white">Email: support@e-kisan.com</p>
+                    <p class="text-white">Phone: +91 7738824939</p>
+                    <p class="text-white" id="address">Address: Akot Road near Lodi Garden ,Akola ,Maharashtra India</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Privacy Policy</h5><hr class="bg-light">
+                    <p class="text-white"><a href="/aboutus/" class="text-white">About Us</a></p>
+                    <p class="text-white"><a href="/privacypolicy/" class="text-white">Privacy Policy</a></p>
+                    <p class="text-white"><a href="/termsandconditons/" class="text-white">Terms and Conditions</a></p>
+                    
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Services To Come Soon</h5><hr class="bg-light">
+                    <p><a href="#" class="text-white">Farm Surveillance</a></p>
+                    <p><a href="#" class="text-white">Farm Management and Sell</a></p>
+                    <p><a href="#" class="text-white">Crop Advisory</a></p>
+                    <p><a href="#" class="text-white">Agri-Insurance</a></p>
+                </div>
+            </div>
+             
+        <div class="text-center p-3">
+            <p class="text-white mb-0">All Rights Reserved 2024 © e-Kisan.com</p>
+        </div>
+
+
+    </footer>
+
+    <script>
+        let slideIndex = 0;
+        const MoreCards = document.querySelectorAll('.MoreCard');
+        const slider = document.querySelector('.slider');
+
+        function showSlides(n) {
+            slideIndex = n;
+            const offset = -slideIndex * 20;  // 20% width per card
+            slider.style.transform = `translateX(${offset}%)`;
+        }
+
+        function nextSlide() {
+            if (slideIndex < MoreCards.length - 5) {
+                showSlides(slideIndex + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (slideIndex > 0) {
+                showSlides(slideIndex - 1);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

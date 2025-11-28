@@ -1,0 +1,82 @@
+{% load static %}
+<head>
+    <link rel="shortcut icon" src="/static/images/fav.png">
+<style>
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+</style>
+</head>
+<body  style="background-color:  #E0FFE0;">    
+    <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -70px;">
+
+    <div class="sufee-login d-flex align-content-center flex-wrap rounded">
+        <div class="container">
+            <div class="login-content"  style="box-shadow: 0 0 50px gray ;"> 
+                <div class="login-form">
+                    <h4 style="color: black;margin-top: -20px;margin-bottom: -5px;">Edit Profile</h4><hr>
+                    <form method="post" id="dealersedit" action="/farmer/updatefarmerprofile/{{farmer.id}}/">
+                        {% csrf_token %}
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    NAME
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="name" value="{{farmer.name}}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    Location
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <textarea name="address" class="form-control">{{farmer.address}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    City
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="city" value="{{farmer.city}}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label class=" form-control-label">
+                                    State
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" name="state" value="{{farmer.state}}" class="form-control">
+                            </div>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-success btn-flat" style="margin-bottom: -20px;"><b>EDIT</b></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div style="margin-left: 218px;">   
+            {% include 'chat.html' %}
+            {% include 'footer.html' %}
+        <div>
+            
+</body>
+</html>

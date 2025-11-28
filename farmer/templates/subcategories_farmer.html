@@ -1,0 +1,118 @@
+
+<head>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+<style>
+        .card {
+            height: 120px;
+            width: 200px;
+            margin-bottom: 50px;
+            margin-right: 10px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+                margin-left: 60px;
+                margin-bottom: 20px;
+            }
+
+            .card:nth-child(odd) {
+                clear: both; 
+            }
+        }
+    </style>
+        <style>
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-card {
+    height: 250px;
+    width: 220px;
+    margin-right: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background: linear-gradient(145deg, white, white);
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-card-title {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.product-card-subtitle {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.product-card-image {
+    display: block;
+    margin: 10px auto;
+    height: 100px;
+    width: auto;
+}
+
+.product-card-text {
+    font-size: 15px;
+    color: #333;
+    margin-top: -10px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+</style>
+
+ </head>   
+<body style="background-color:  #E0FFE0;">
+     <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -40px;">
+        <div class="card text-dark rounded" style="width: 900;height: 50px;margin-left: 50px;box-shadow: 0 0 20px gray;">
+            <h3 class="p-2 text-center" style="font-family: 'Comic Sans MS', cursive, sans-serif;">{{fruit.categoryineng}}</h3>
+        </div>
+    <div class="row">
+          {% if crops_with_farmers %}
+            {% for crop_info in crops_with_farmers %}
+                <div class="col-md-3">
+                    <a href="{% url 'farmer:productpriceadd' %}?fruit={{ crop_info.crop.nameineng }}" class="product-card-link">
+                        <div class="card product-card rounded text-dark" style="box-shadow: 0 0 5px lightgray;">
+                            <h5 class="product-card-title" style="font-size: 16px;font-weight: bold;">{{ crop_info.crop.nameineng }}</h5>
+                            <h5 class="product-card-subtitle" style="font-size: 16px;font-weight: bold;">{{ crop_info.crop.nameinhindi }} <br> {{ crop_info.crop.nameinurdu }}</h5>
+                            <div class="image-container">
+                                <img src="{{ crop_info.crop.image.url }}" class="product-card-image" alt="{{ crop_info.crop.nameineng }} Image">
+                            </div>
+                            <div class="container mt-2">
+                                <p class="product-card-text" style="font-size: 13px;">{{ crop_info.farmer_count }} farmer added {{ crop_info.crop.nameineng }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-md-4">
+                <div class="card text-dark rounded" style="width: 350;height: 50px;margin-left: 50px;box-shadow: 0 0 20px gray;">
+            
+                <b class="p-2" style="color: black;margin-left: 20px;font-family: 'Comic Sans MS', cursive, sans-serif;">No {{fruit.categoryineng}} Available.</b>
+                </div>    
+            </div>
+        {% endif %}
+    </div>
+</div> 
+<br><br>
+
+    <div style="margin-left: 218px;">   
+        {% include 'chat.html' %}
+        {% include 'footer.html' %}
+    <div>

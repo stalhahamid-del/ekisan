@@ -1,0 +1,77 @@
+
+<style>
+        @media only screen and (max-width: 1024px) {
+         table{
+            width: 700px;
+            border-color: black;
+            margin-left: 100px;
+         }  
+         
+        }
+        @media only screen and (max-width: 768px) {
+           table{width: 300px;
+           border-color: black;
+           margin-left: 3px;}
+        }
+        span{
+            font-size: 11px;
+         }
+    </style>
+ </head>   
+<body style="background-color:  #E0FFE0;">
+    <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;">
+
+<form method="post" action="/farmer/productpriceadddone/{{product_name}}/{{product_type}}/{{quality}}/{{rate}}/{{quantity}}/">
+    {% csrf_token %}    
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Agreement Confirmation</h5>
+      <p class="card-text">I, <strong>{{user_name}}</strong>, hereby confirm that the details provided regarding the agricultural products I am selling to the dealer through Ekisan are accurate and genuine. I understand and acknowledge that the products I am selling meet the quality standards as described, and I assure their authenticity.</p>
+      <p class="card-text">I further affirm that the information provided, including product specifications, images, and descriptions, are truthful and reflect the actual condition of the products. I take full responsibility for the accuracy of the information provided and understand that any discrepancies may result in legal consequences.</p>
+      <p class="card-text">I hereby agree that I will not misrepresent any information regarding the products listed for sale and will maintain transparency in all dealings with the dealer and Ekisan platform.</p>
+      <p class="card-text">I also confirm that I have the legal right to sell the products listed and that they comply with all applicable laws and regulations governing agricultural product sales in my region.</p>
+      <p class="card-text">This agreement serves as a binding commitment, and I fully understand and accept its terms and conditions.</p>
+            <table border="2px">
+                <tr>
+                    <th style="padding:10px"><span>Name</span></th>
+                    <th style="padding:10px"><span>Type</span></th>
+                    <th style="padding:10px"><span>Quality</span></th>
+                    <th style="padding:10px"><span>Rate</span></th>
+                    <th style="padding:10px"><span>Quantity</span></th>
+                </tr>
+                <tr><td style="padding:10px"><span>{{product_name}}</span></td>
+                    <td style="padding:10px"><span>{{product_type}}</span></td>
+                    <td style="padding:10px"><span>{{quality}}</span></td>
+                    <td style="padding:10px"><span>{{rate}} RS</span></td>
+                    <td style="padding:10px"><span>{{quantity}} KG</span></td>
+                </tr>
+            </table>
+
+      <hr>
+      <p class="card-text">Sincerely,</p>
+      <div class="signature">[Signature of Farmer]</div>
+      <p class="card-text"><strong>{{user_name}}</strong></p>
+    </div>
+  </div>
+</div>
+    <input type="submit" value="Agree" class="btn btn-primary btn-sm rounded ml-4">
+</form>
+</div>
+
+<br><br><br><br>  
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+         
+<div style="margin-left: 218px;">   
+    {% include 'chat.html' %}
+    {% include 'footer.html' %}
+<div>

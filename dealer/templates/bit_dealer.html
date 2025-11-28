@@ -1,0 +1,128 @@
+<head>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+	
+<style>
+    @media only screen and (max-width: 768px) {
+        .bits{
+          margin-left: 0px ; 
+        margin-top : 50px;   
+        }
+        .farmer{
+            margin-left: 50px;
+        }
+        .product{
+            margin-left: 50px;
+        }
+        .producttype{
+            margin-left: 10px;
+        }
+        .quality{
+            margin-left: 50px;
+        }
+        .rate{
+            margin-left: 70px;
+        }
+        .quantity{
+            margin-left: 40px;
+        }
+        .label{
+             margin-left: 0px;
+             margin-top:7px;
+             font-weight:  bold;
+             font-size: 18px;
+        }
+        .bit{
+            margin-left: 0px; 
+        }
+        .buttton{
+            margin-left: 0px; 
+            width: 100px;
+        }
+    }
+    @media only screen and (min-width: 1024px) {
+       .bits{
+            margin-left: 150px ; 
+            margin-top : 50px;
+        }
+        .farmer{
+            margin-left: 100px;
+        }
+        .product{
+            margin-left: 92px;
+        }
+        .producttype{
+            margin-left: 55px;
+        }
+        .quality{
+            margin-left: 97px;
+        }
+        .rate{
+            margin-left: 115px;
+        }
+        .quantity{
+            margin-left: 87px;
+        }
+        .label{
+             margin-left: 50px;
+             margin-top:7px;
+             font-weight:  bold;
+             font-size: 18px;
+        }
+        .bit{
+            margin-left: 50px; 
+            width: 100px;
+        }
+        .buttton{
+            margin-left: 50px; 
+            width: 50px;
+        }
+    }
+</style>
+</head>    
+
+<body style="background-color:  #E0FFE0;">
+	
+<div style="position:fixed;">
+        {% include 'menudealer.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'dealerheader.html' %}  
+    </div>
+
+    <div class="container mt-3" style="margin-left: 240px;width: 1020px;">
+
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="bits col-md-8">
+                <div class="card" style="box-shadow: 0 0 50px gray;">
+                    <div class="card-header">
+                        <strong class="card-title">Bitting Form</strong>
+                    </div>  
+                    <div class="card-body">
+                        <form method="post" action="/dealer/process_bit/{{user_id}}/{{ user_name }}/{{ product_name }}/{{ product_type }}/{{ quality }}/{{ rate }}/{{ quantity }}/">
+                            {% csrf_token %}
+                            <p>Farmer: <input type="text" class="farmer" name="farmer" value="{{ user_name }}" readonly></p>
+                            <p>Product: <input type="text" class="product" name="product" value="{{ product_name }}" readonly></p>
+                            <p>Product Type: <input type="text" class="producttype" name="product_type" value="{{ product_type }}" readonly></p>
+                            <p>Quality: <input type="text" class="quality" name="quality" value="{{ quality }}" readonly></p>
+                            <p>Rate: <input type="text" class="rate" name="rate" value="{{ rate }}" readonly></p>
+                            <p>Quantity: <input type="text" class="quantity" name="quantity" value="{{ quantity }} Kg" readonly></p>
+                            <div style="display: flex">
+                                <label class="label"> Your Bit : </label>
+                                <input class="form-control" type="text" name="bit"/> 
+                                <input class="form-control bg-success text-white" type="submit" />
+                            </div>       
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div>
+
+</div>
+
+<div style="margin-left: 218px;">   
+        {% include 'dealerfooter.html' %}
+    </div>

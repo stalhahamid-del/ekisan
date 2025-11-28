@@ -1,0 +1,62 @@
+<head>
+        <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+    </head>
+ <body style="background-color:  #E0FFE0;">    
+     <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: 0px;">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="card" style="border: 2px solid black;border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                        <div class="card-header text-white" style="background-color: darkgreen;">
+                            <strong class="card-title" style="font-family: Comic MS,cursive,sans-serif;">Product Table</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" >
+                            <table id="bootstrap-data-table" class="table table-striped dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table_info">
+                                <thead class="bg-success">
+                                <tr role="row">
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 200px;font-family: Comic MS,cursive,sans-serif;"> Product Name</th>
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 200px;font-family: Comic MS,cursive,sans-serif;"> Product Owner</th>
+                                     <th class="sorting" aria-controls="bootstrap-data-table" style="width: 205px;font-family: Comic MS,cursive,sans-serif;">Quantity</th>
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 148px;font-family: Comic MS,cursive,sans-serif;">Rate</th>
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 121px;font-family: Comic MS,cursive,sans-serif;">Quality</th>
+
+                                </tr>
+                                </thead>
+                                <tbody style="background-color: rgb(194, 237, 194);"> 
+                                    {% for product in products %}
+                                    <tr role="row" class="odd">
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{product.product_name}}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{product.user.name}}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{product.quality}}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{product.rate}}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{product.quantity}} KG</td>
+                                        {% empty %}
+                                        <td colspan="5" style="font-family: Comic MS,cursive,sans-serif;"> No new products</td>
+                                    </tr> 
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>    
+                    
+                </div>
+            </div>        
+        </div>
+    </div>
+
+</div>
+         <div style="margin-left: 218px;">   
+            {% include 'chat.html' %}
+            {% include 'footer.html' %}
+        <div>
+</div>

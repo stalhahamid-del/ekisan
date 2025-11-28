@@ -1,0 +1,72 @@
+<head>
+       <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+
+</head>
+<body style="background-color:  #E0FFE0;">
+
+   <div style="position:fixed;">
+        {% include 'menudealer.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'dealerheader.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: 100px;">
+
+        <div class="animated fadeIn">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="card" style="border: 2px solid black;border-top-left-radius: 12px;border-top-right-radius: 12px;">
+                        <div class="card-header" style="background-color: black;color: white;border-top-left-radius: 10px;border-top-right-radius: 10px; ">
+                            <strong class="card-title">Product Table</strong>
+                        </div>
+                        <div class="card-body" style="background-color: rgb(228, 226, 226);">
+                            <div class="table-responsive">
+                            <table id="bootstrap-data-table"  style="background-color: white;" class="table table-striped dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table_info">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 200px;"> Product Name</th>
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 200px;"> Product Owner</th>
+                                     <th class="sorting" aria-controls="bootstrap-data-table" style="width: 205px;">Quantity</th>
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 148px;">Rate</th>
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 148px;">Bit Rate</th>
+                                    <th class="sorting" aria-controls="bootstrap-data-table" style="width: 121px;">Bit Value</th>
+
+                                </tr>
+                                </thead>
+                                <tbody> 
+                                    {% for product in products %}
+                                    <tr role="row" class="odd">
+
+                                        <td>{{product.product }}</td>
+                                        <td>{{product.farmer}}</td>
+                                        <td>{{product.quantity}}</td>
+                                        <td>{{product.quality}}</td>
+                                        <td>{{product.rate}}</td>
+                                        <td>{{product.bit_value}}</td>
+                                    </tr> 
+                                   {% empty %}
+                                    <tr>
+                                        <td colspan="8">No products available</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>        
+        </div><!-- .animated -->
+    </div>
+
+</div>
+        
+    <div style="margin-left: 218px;">   
+        {% include 'dealerfooter.html' %}
+    </div>
+
+
+
+</body>

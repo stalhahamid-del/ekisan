@@ -1,0 +1,203 @@
+
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .subscription-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .subscription-card {
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .subscription-card:hover {
+            border-color: white;
+            box-shadow: 0 0 50px #46eb96d7;
+        }
+
+        .btn-subscribe {
+            border: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-subscribe:hover {
+            background-color: #46eb96d7;
+            color: white;
+        }
+        @media only screen and (max-width: 768px) {
+        body{
+            height: 675px;
+        }
+        .subscription-card{
+            margin-left: -100px;
+            width: 300px;
+            margin-top: 70px;
+            height: 300px;
+        } 
+        .free{margin-top: 50px;}    
+        .basic{margin-top: 100px;}
+        .standard{margin-top: 100px;}
+        .premium{margin-top: 100px;}
+
+        .backgroundimg {
+        width: 370px;
+        height: 675px; 
+        background-size: contain; 
+        background-position: center; 
+        background-image: url('../../static/images/farm3.jpg');  
+        backdrop-filter: blur(100px); 
+        overflow-y: hidden; 
+        background-size: cover; 
+        margin: 0;
+    }  
+    .btn-subscribe{
+        margin-top: -90px;
+
+    }    
+    .blacklayer{
+        background-color: rgba(0, 0, 0, 0.5);
+        margin-top: -50px;
+        height: 675px;
+    }
+    .text{
+        margin-left: -250px;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+    .back{
+        margin-left: -90px;
+    }
+     }
+     @media screen and (min-width: 1024px) {
+    .backgroundimg{
+        background-image: url('../../static/images/farm3.jpg');  
+        backdrop-filter: blur(100px); 
+        overflow-y: hidden; 
+        background-size: cover; 
+        height: 593px; 
+        margin: 0;
+    }
+    .text{
+        margin-top: 10px;
+        margin-left:75px
+    }
+    .back{
+        margin-left: 700px;
+        margin-top:20px;
+    }
+    .blacklayer{
+       background-color: rgba(0, 0, 0, 0.5); 
+        margin-top: -50px ;
+    }
+    .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    } 
+    </style>
+</head>
+
+<body  style="background-color:  #E0FFE0;">
+    <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -40px;">
+        <div >
+                <a href="/farmer/extendsubscription/"><button class="back btn btn-primary rounded" style="margin-left: 900px;">Back</button></a>
+                <h4 class="text mb-4" style="margin-left: 350px;margin-top: -50px;font-family: 'Comic Sans MS', cursive, sans-serif;">You Choosed Basic Plan</h4>
+                <div>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="basic card rounded subscription-card" style="width: 300px;box-shadow: 0 0 20px gray;background-color: lightgray;">
+                                <h5 class="card-title p-1 rounded"
+                                    style="margin-left: 57px;margin-right: 60px;">Basic </h5>
+                                <hr class="bg-white">
+                                <p class="card-text">
+                                <p class="card-text">can make 4 bits</p>
+                                <p class="card-text">can buy 4 products</p>
+                                </p>
+                                <hr class="bg-white">
+                                <h3 class="text-center">&#8377;499/month</h3>
+                                <!-- <a href="/farmer/addbasicplan/499"> -->
+                                        <button class="btn btn-subscribe btn-block" id="rzp-button1">Subscribe</button>
+
+                                    <!-- </a> -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+             <div style="margin-left: 218px;">   
+            {% include 'chat.html' %}
+            {% include 'footer.html' %}
+        <div>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "rzp_test_bX75Gd98qBwkpY", // Enter the Key ID generated from the Dashboard
+            "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "EKisan",
+            "description": "Subsription",
+            "image": "/static/images/fav.png",
+            "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the id obtained in the response of Step 1
+            "handler": function (response) {
+                window.location.href = `http://localhost:8000/farmer/success/{{payment.amount}}/{{ payment.id }}/${response.razorpay_payment_id}/${response.razorpay_order_id}/${response.razorpay_signature}/basic/`;
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+        });
+        document.getElementById('rzp-button1').onclick = function (e) {
+            rzp1.open();
+            e.preventDefault();
+        };
+    </script>
+            
+        </body>
+
+</html>

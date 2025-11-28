@@ -1,0 +1,86 @@
+
+
+<head>
+     <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+	
+</head>
+<body style="background-color:  #E0FFE0;">
+<div style="position:fixed;">
+        {% include 'menudealer.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'dealerheader.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top:100px;">
+
+
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Products</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered dataTable no-footer"
+                                role="grid" aria-describedby="bootstrap-data-table_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" aria-controls="bootstrap-data-table" style="width: 200px;">
+                                            Kisan Name</th>
+                                        <th class="sorting" aria-controls="bootstrap-data-table" style="width: 200px;">
+                                            Product Name</th>
+                                        <th class="sorting" aria-controls="bootstrap-data-table" style="width: 200px;">
+                                            Product Name</th>
+                                        <th class="sorting" aria-controls="bootstrap-data-table" style="width: 205px;">
+                                            Quantity</th>
+                                        <th class="sorting" aria-controls="bootstrap-data-table" style="width: 148px;">Rate
+                                        </th>
+                                        <th class="sorting" aria-controls="bootstrap-data-table" style="width: 121px;">
+                                            Quality</th>
+                                        <th class="sorting" aria-controls="bootstrap-data-table"
+                                            style="width: 250px; padding-left: 100px;">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in fruit_data %}
+                                    <tr role="row" class="odd">
+                                        <td>{{data.user.name}}</td>
+                                        <td>{{data.product_name}}</td>
+                                        <td>{{data.product_type}}</td>
+                                        <td>{{data.quality}}</td>
+                                        <td>{{data.rate}}</td>
+                                        <td>{{data.quantity}}</td>
+                                        <td>
+                                            <a href="/dealer/bit/{{data.user_id}}/{{data.user.name}}/{{data.product_name}}/{{data.product_type}}/{{data.quality}}/{{data.rate}}/{{data.quantity}}/">
+                                                <input type="submit" style="width: 100px;margin-left: 50px;" name="delete" value="BIT"
+                                                    class="btn btn-success form-control">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="8">No data available</td>
+                                    </tr>
+                                {% endfor %}     
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div>
+
+</div>
+
+
+</div>
+<div style="margin-left: 218px;">   
+        {% include 'dealerfooter.html' %}
+    </div>

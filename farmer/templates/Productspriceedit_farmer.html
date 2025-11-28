@@ -1,0 +1,144 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang=""> 
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-KISAN | Farmer </title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"> </script>  
+
+
+        <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+    </head>
+ <body style="background-color:  #E0FFE0;">    
+     <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -40px;">
+<div style="padding-left: 800px;">
+    <a href=" ">
+        <button class="btn btn-primary">Back</button>
+    </a>
+</div>
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content"> 
+                <div class="login-form">
+                    <h3>Edit Products Price</h3><hr><br>
+                    <form method="post" action=" ">
+                        <input type="hidden" name="rid" value=" ">
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">
+                                    NAME
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <select class="form-control">
+                                        <option value=""> </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">
+                                    Quantity
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <input type="number" name="quantity" value=" " class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">
+                                    RATE
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <input type="number" name="rate" value=" " class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">
+                                    Address
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <textarea type="text" name="address" value="" class="form-control"> </textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">
+                                   Product Type
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <select class="form-control">
+                                    <option> </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-4">
+                                <label class=" form-control-label">
+                                    Quality
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <select class="form-control">
+                                    <option> </option>
+                                </select>
+                            </div>
+                        </div>
+                        <br><hr>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div style="margin-left: 218px;">   
+        {% include 'chat.html' %}
+        {% include 'footer.html' %}
+    <div>
+
+</body>
+</html>

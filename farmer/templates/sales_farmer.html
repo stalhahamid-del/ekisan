@@ -1,0 +1,98 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EKISAN | Farmer </title>
+   <meta name="description" content="E-KISAN Kid-friendly Platform">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Comic+Sans+MS:400,600,700,800' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Comic+Sans+MS:400,600,700,800' rel='stylesheet' type='text/css'>
+
+<style>
+        .card {
+            height: 120px;
+            width: 200px;
+            margin-bottom: 50px;
+            margin-right: 10px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+                margin-left: 60px;
+                margin-bottom: 20px;
+            }
+
+            .card:nth-child(odd) {
+                clear: both; 
+            }
+        } 
+.category-card {
+    height: 140px;
+    width: 200px;
+    margin-right: 10px;
+    padding: 10px;
+    background-color: var(--category-color, #f0f0f0);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.category-title {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 2px 0;
+}
+</style>
+
+ </head>   
+
+<body style="background-color:  #E0FFE0;">    
+
+    <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;">
+        <div class="row">
+        {% for category in categories %}
+            <div class="col-md-3">
+                <a href="/farmer/crops/{{category.id}}/">
+                    <div class="category-card rounded text-dark" style="box-shadow:0 0 5px lightgray;background-color: light{{category.color}};">
+                        <h4 class="category-title">{{category.categoryineng}}</h4>
+                        <h4 class="category-title">{{category.categoryinhindi}}</h4>
+                        <h4 class="category-title" style="margin-top: -12px;">{{category.categoryinurdu}}</h4>
+                    </div>
+                    <br>
+                </a>
+            </div>
+        {% endfor %}    
+        </div>
+    </div>
+    <br><br>
+
+    <div style="margin-left: 218px;">   
+        {% include 'chat.html' %}
+        {% include 'footer.html' %}
+    <div>
+
+</body>

@@ -1,0 +1,57 @@
+{% load static %}
+<head>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+</head>
+<body style="width: 1100px;background-color:  #E0FFE0;">
+     <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 500px;width: 720px;margin-top: -40px;">
+        <h4 class="mt-5 mb-4" style="margin-left: 110px;font-family: 'Comic Sans MS', cursive, sans-serif;">Today's Weather Update</h4>
+        <div class="row">
+            <div class="col-md-8 mb-4">
+                <div class="card" style="box-shadow: 0 0 20px gray;">
+                    <div class="card-header text-white" style="background-color: darkgreen;">
+                        <h5 class="card-title" style="font-family: 'Comic Sans MS', cursive, sans-serif;">{{ weather.location }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Temperature:</b> {{ weather.temperature }}°C</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Condition:</b> {{ weather.condition }}</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Humidity:</b> {{ weather.humidity }}%</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Wind Speed:</b> {{ weather.wind_speed }} km/h</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Wind Direction:</b> {{ weather.wind_dir }}</p>
+                                
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Pressure:</b> {{ weather.pressure }} mb</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Feels Like:</b> {{ weather.feels_like }}°C</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Visibility:</b> {{ weather.visibility }} km</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>UV Index:</b> {{ weather.uv_index }}</p>
+                                <p class="text-dark" style="font-family: 'Comic Sans MS', cursive, sans-serif;"><b>Cloud Cover:</b> {{ weather.cloud }}%</p>
+                            </div>
+                        </div>
+                        <!-- <p class="text-dark">Sunrise: {{ weather.sunrise }}</p>
+                        <p class="text-dark">Sunset: {{ weather.sunset }}</p> -->
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div style="margin-left: 218px;">   
+            {% include 'chat.html' %}
+            {% include 'footer.html' %}
+        <div>
+
+</div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>

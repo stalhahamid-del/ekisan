@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>EKISAN Admin</title>
+
+<link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+<link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'bower_components/Ionicons/css/ionicons.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'bower_components/jvectormap/jquery-jvectormap.css' %}">
+
+<link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
+
+<link rel="stylesheet" href="{% static 'dist/css/skins/_all-skins.min.css' %}">
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<script nonce="e1f6f06c-5dcc-495e-91a5-bba0ff97e772">try{(function(w,d){!function(o,p,q,r){o[q]=o[q]||{};o[q].executed=[];o.zaraz={deferred:[],listeners:[]};o.zaraz.q=[];o.zaraz._f=function(s){return async function(){var t=Array.prototype.slice.call(arguments);o.zaraz.q.push({m:s,a:t})}};for(const u of["track","set","debug"])o.zaraz[u]=o.zaraz._f(u);o.zaraz.init=()=>{var v=p.getElementsByTagName(r)[0],w=p.createElement(r),x=p.getElementsByTagName("title")[0];x&&(o[q].t=p.getElementsByTagName("title")[0].text);o[q].x=Math.random();o[q].w=o.screen.width;o[q].h=o.screen.height;o[q].j=o.innerHeight;o[q].e=o.innerWidth;o[q].l=o.location.href;o[q].r=p.referrer;o[q].k=o.screen.colorDepth;o[q].n=p.characterSet;o[q].o=(new Date).getTimezoneOffset();if(o.dataLayer)for(const B of Object.entries(Object.entries(dataLayer).reduce(((C,D)=>({...C[1],...D[1]})),{})))zaraz.set(B[0],B[1],{scope:"page"});o[q].q=[];for(;o.zaraz.q.length;){const E=o.zaraz.q.shift();o[q].q.push(E)}w.defer=!0;for(const F of[localStorage,sessionStorage])Object.keys(F||{}).filter((H=>H.startsWith("_zaraz_"))).forEach((G=>{try{o[q]["z_"+G.slice(7)]=JSON.parse(F.getItem(G))}catch{o[q]["z_"+G.slice(7)]=F.getItem(G)}}));w.referrerPolicy="origin";w.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(o[q])));v.parentNode.insertBefore(w,v)};["complete","interactive"].includes(p.readyState)?zaraz.init():o.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document)}catch(e){throw fetch("/cdn-cgi/zaraz/t"),e;};</script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+<header class="main-header">
+{% include 'header_admin.html' %}
+</header>
+
+{% include 'menu_admin.html' %}
+
+
+<div class="content-wrapper" style="height: 700px;">
+    <br><br>
+
+    <div style="width: 800px;margin-left: 110px;">
+        
+        <div class="box box-warning"  style="box-shadow: 0 0 8px lightgray;">
+            <div class="box-header with-border">
+                <h3 class="box-title">Add A Category</h3>
+            </div>
+
+            <div class="box-body">
+                <form role="form" method="post" action="/admin/addcategory/">
+                    {% csrf_token %}    
+                    <div class="form-group">
+                        <label>Category in English</label>
+                        <input type="text" class="form-control" name="categoryineng" placeholder="Enter Category in English">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category in Hindi </label>
+                        <input type="text" class="form-control" name="categoryinhindi" placeholder="Enter Category in Hindi" >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category in Urdu</label>
+                        <input type="text" class="form-control" name="categoryinurdu" placeholder="Enter Category in Urdu" >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Color</label>
+                        <input type="text" class="form-control" name="color" placeholder="Enter Color" >
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn btn-primary" style="width: 100px;margin-left: 670px;" value="Add" >
+                    </div>
+                </form>
+            </div>    
+        </div>
+    </div>
+
+<br><br>
+
+<footer class="footer" style="width: 1300px;margin-left: -230px;margin-top: 140px;">
+{% include 'footer_admin.html' %}
+</footer>
+
+
+
+
+<script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script>
+<script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+
+<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'bower_components/fastclick/lib/fastclick.js' %}"></script>
+
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+
+<script src="{% static 'bower_components/jquery-sparkline/dist/jquery.sparkline.min.js' %}"></script>
+
+<script src="{% static 'plugins/jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+<script src="{% static 'plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+
+<script src="{% static 'bower_components/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'bower_components/chart.js/Chart.js' %}"></script>
+
+<script src="{% static 'dist/js/pages/dashboard2.js' %}"></script>
+
+<script src="{% static 'dist/js/demo.js' %}"></script>
+</body>
+
+</html>

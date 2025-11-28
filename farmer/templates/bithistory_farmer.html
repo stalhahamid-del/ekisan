@@ -1,0 +1,106 @@
+<head>
+    <link rel="shortcut icon" href="/static/images/fav.png">
+</head>
+<body style="background-color:  #E0FFE0;">
+
+    <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -30px;">
+        <br>
+
+        <a href="/farmer/farmerbit/"><button class="btn btn-primary rounded" style="margin-left: 930px;margin-top: -30px;font-family: Comic MS,cursive,sans-serif;">Back</button></a>
+        <br><br>
+        {% for year, products in bits_by_year.items %}
+            <div class="card card-bordered mt-3" style="font-family: Comic MS,cursive,sans-serif;border: 2px solid black;border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <div class="card-header text-white" style="background-color: rgb(53, 6, 6);">
+                    <h4 style="font-family: Comic MS,cursive,sans-serif;">Year : {{ year }}</h4>
+                </div>
+                <div class="card-body" style="background-color: rgb(237, 235, 235);">
+                    {% for product, bits in products.items %}
+                        <h4 style="font-family: Comic MS,cursive,sans-serif;">Product : {{ product }}</h4><br>
+                        <table class="table  table-striped dataTable no-footer">
+                            <thead class="bg-danger">
+                                <tr>
+                                    <th style="font-family: Comic MS,cursive,sans-serif;">Product Type</th>
+                                    <th style="font-family: Comic MS,cursive,sans-serif;">Quality</th>
+                                    <th style="font-family: Comic MS,cursive,sans-serif;">Rate</th>
+                                    <th style="font-family: Comic MS,cursive,sans-serif;">Quantity</th>
+                                    <th style="font-family: Comic MS,cursive,sans-serif;">Bit Value</th>
+                                    <th style="font-family: Comic MS,cursive,sans-serif;">Bitter</th>
+                                    <th style="font-family: Comic MS,cursive,sans-serif;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Accepted Bits -->
+                                {% for bit in bits.accepted %}
+                                <tr class="table-success">
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.product_type }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.quality }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.rate }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.quantity }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.bit_value }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.bitter }}</td>
+                                    
+                                    <td>
+                                        <span class="btn btn-success">Accepted</span>
+                                        <a href="/farmer/wait/{{bit.bitter}}/"><span class="btn btn-primary" style="font-family: Comic MS,cursive,sans-serif;">View</span></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                <!-- Rejected Bits -->
+                                {% for bit in bits.rejected %}
+                                <tr class="table-danger">
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.product_type }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.quality }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.rate }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.quantity }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.bit_value }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;">{{ bit.bitter }}</td>
+                                    <td style="font-family: Comic MS,cursive,sans-serif;"><span class="btn btn-danger">Rejected</span></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+        <div class="card" style="border: 2px solid black;border-top-left-radius: 10px; border-top-right-radius: 10px;">
+            <div class="card-header text-white" style="background-color: rgb(53, 6, 6);">
+                <strong class="card-title" style="font-family: Comic MS,cursive,sans-serif;">Product Table</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped dataTable no-footer">
+                    <thead class="bg-danger">
+                        <tr>
+                            <th style="font-family: Comic MS,cursive,sans-serif;">Product Type</th>
+                            <th style="font-family: Comic MS,cursive,sans-serif;">Quality</th>
+                            <th style="font-family: Comic MS,cursive,sans-serif;">Rate</th>
+                            <th style="font-family: Comic MS,cursive,sans-serif;">Quantity</th>
+                            <th style="font-family: Comic MS,cursive,sans-serif;">Bit Value</th>
+                            <th style="font-family: Comic MS,cursive,sans-serif;">Bitter</th>
+                            <th style="font-family: Comic MS,cursive,sans-serif;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr><td colspan="9" style="font-family: Comic MS,cursive,sans-serif;background-color: rgb(236, 178, 178);">No new bits</td></tr>
+                        
+                    </tbody>    
+                </table>   
+            </div>
+        </div> 
+        {% endfor %}
+    </div>
+
+    <div style="margin-left: 218px;">   
+        {% include 'chat.html' %}
+        {% include 'footer.html' %}
+    <div>
+
+</body>

@@ -1,0 +1,242 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EKISAN | About Us</title>
+    <link rel="shortcut icon" href="{% static 'images/fav.png' %}" id="favicon">
+    <meta name="description" content="Kid-friendly EKISAN platform">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .about-section {
+            padding: 40px;
+            background-color: white;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        .about-section h2 {
+            margin-bottom: 25px;
+            font-size: 2.5em;
+        }
+        .about-section p {
+            text-align: justify;
+            font-size: 1.1em;
+        }
+        body {
+            background-color: #E0FFE0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .navbar {
+            background-color: rgb(26, 39, 26);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-size: 1.2em;
+        }
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+        .card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-body img {
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .card-footer {
+            text-align: center;
+        }
+        .footer {
+            background-color: #2b3a24;
+            color: white;
+        }
+        .footer a {
+            color: white;
+        }
+        .footer hr {
+            border-top: 1px solid white;
+        }
+        .card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/"><img src="{% static 'images/fav.png' %}" style="width: 30px;height: 30px;"> EKISAN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/termsandconditons/">Terms And Conditions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/privacypolicy/">Privacy Policy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/aboutus/">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/index/">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register/">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+     
+    <div class="container mt-5">
+        <div class="about-section text-center" style="box-shadow: 0 0 14px lightgray;">
+            <h2>About EKISAN</h2>
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <p class="lead p-3">Welcome to EKISAN, your trusted platform for connecting farmers and dealers.</p>
+                    <p class="p-3">EKISAN is dedicated to revolutionizing the agricultural trade by providing a seamless online marketplace where farmers can sell their products and dealers can place bids directly. Our platform aims to bridge the gap between farmers and markets, ensuring fair pricing and efficient transactions.</p>
+                    <p class="p-3">Founded in 2023, EKISAN is headquartered in Akola, Maharashtra, India. We strive to empower farmers by leveraging technology to simplify the process of selling agricultural products, thereby enhancing their livelihoods and contributing to agricultural growth.</p>
+                </div>
+                <div class="col-md-6 card p-3" style="height: 365px;box-shadow: 0 0 14px lightgray;">
+                    <img src="/static/images/aboutus1.jpg" class="img-fluid mb-4 rounded" alt="About EKISAN">
+                </div>    
+            </div>    
+        </div>
+
+        <div class="about-section text-center" style="box-shadow: 0 0 14px lightgray;">
+            <h2>Our Mission</h2>
+            <div class="row mt-5">
+                <div class="col-md-6 card p-3" style="box-shadow: 0 0 14px lightgray;">
+                    <img src="/static/images/aboutus2.jpg" class="rounded" height="300px" alt="Our Mission">
+                </div>
+                <div class="col-md-6">    
+                    <p class="p-5">EKISAN's mission is to create a transparent and efficient marketplace that empowers farmers and facilitates fair trade practices. We are committed to leveraging technology to enhance agricultural commerce and promote sustainable farming practices.</p>
+                </div>    
+            </div>
+        </div>    
+
+        <div class="about-section text-center" style="box-shadow: 0 0 14px lightgray;">
+             
+            <h2>Our Team</h2>
+            <div class="row mt-5">
+                <div class="col-md-6 mb-5">
+                    <div class="card">
+                        <div class="card-body" style="box-shadow: 0 0 14px lightgray;">
+                            <img src="/static/images/admin.jpg" height="100" width="100"  alt="Aliumuddin Syed">
+                            <h5 class="card-title">Aliumuddin Syed</h5>
+                            <p class="card-text">Cofounder</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <div class="card">
+                        <div class="card-body" style="box-shadow: 0 0 14px lightgray;">
+                            <img src="/static/images/Talha.png" height="100" width="100"  alt="Syed Talha Hamid">
+                            <h5 class="card-title">Syed Talha Hamid</h5>
+                            <p class="card-text">Cofounder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-section text-center" style="box-shadow: 0 0 4px gray;">
+            <h2>Contact Us</h2>
+            
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div>
+                        <p class="pt-5 pl-5 pr-5">If you have any questions or feedback, please reach out to us:</p>
+                        <p class="pl-5 pr-5">Email: support@ekisan.com</p>
+                        <p class="pl-5 pr-5 pb-5">Address: EKISAN, Akot Road near Lodi Garden, Akola, Maharashtra, India</p>
+                    </div>
+
+                    <div class="card p-3" style="height: 375px;box-shadow: 0 0 14px lightgray;" >
+                        <img src="/static/images/aboutus4.png" class="rounded" alt="Contact Us">
+                    </div>
+                </div>
+
+                <div class="col-md-6 pt-5">
+                    
+                    <div class="card" style="background-color: #E0FFE0;">
+                        <div class="card-header" style="background-color: #2b3a24;color: white;">
+                            <h4><strong>Contact Us</strong></h4>
+                        </div>
+                        <div class="form pt-3 pl-5 pr-5">
+                            <form method="post" action="/contact">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="text" id="name" name="name" class="form-control" required placeholder="Enter your name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" class="form-control" required placeholder="Enter your email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="subject" name="subject" class="form-control" required placeholder="Enter subject">
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="message" name="message" rows="5" class="form-control" required placeholder="Enter your message"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success mb-2">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div> 
+                   
+        </div>
+        </div>
+    </div>    
+    
+    <!-- Footer -->
+    <footer class="footer mt-5" style="background-color: rgb(26, 39, 26);margin-top: 50px;">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-2">
+                    <h4 class="text-white"><img src="/static/images/fav.png"
+                            style="width: 30px;height: 30px;text-decoration: none;"> EKISAN</h4>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white">Contact Us</h5>
+                    <hr class="bg-light">
+                    <p class="text-white">Email: support@e-kisan.com</p>
+                    <p class="text-white">Phone: +91 7738824939</p>
+                    <p class="text-white">Address: Akot Road near Lodi Garden ,Akola ,Maharashtra India</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Privacy Policy</h5>
+                    <hr class="bg-light">
+                    <p class="text-white"><a href="/aboutus/" class="text-white">About Us</a></p>
+                    <p class="text-white"><a href="/privacypolicy/" class="text-white">Privacy Policy</a></p>
+                    <p class="text-white"><a href="/termsandconditons/" class="text-white">Terms and Conditions</a></p>
+    
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Services To Come Soon</h5>
+                    <hr class="bg-light">
+                    <p><a href="#" class="text-white">Farm Surveillance</a></p>
+                    <p><a href="#" class="text-white">Farm Management and Sell</a></p>
+                    <p><a href="#" class="text-white">Crop Advisory</a></p>
+                    <p><a href="#" class="text-white">Agri-Insurance</a></p>
+                </div>
+            </div>
+    
+            <div class="text-center p-3">
+                <p class="text-white mb-0">All Rights Reserved 2024 © e-Kisan.com</p>
+            </div>
+    
+    
+    </footer>
+</body>
+</html>

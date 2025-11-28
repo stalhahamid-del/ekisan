@@ -1,0 +1,104 @@
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+	
+<script>
+        setInterval(function () {
+            var sessionId = "{{ request.session.user_id }}";
+            $.ajax({
+                url: 'http://localhost:8000/dealer/get_notifications/',
+                method: 'GET',
+                dataType: 'json',  // Assuming your response is in JSON format
+                success: function (data) {
+                    if (data.notifications && data.bit_value && data.notifications.length > 0) {
+                        data.notifications.forEach(function (notification) {
+                            var productName = notification.product;
+                            var notificationMessage = notification.notification;
+                            
+                            // Create a new element with the notification message
+                            var notificationElement = $('<p style="color: darkgreen; font-size: 18px; font-weight: bold; font-style: italic; font-family: \'Comic Sans MS\', cursive, sans-serif;"></p>').text(notificationMessage);
+                            var productAmount = data.bit_value ;
+                            var productQuantity = data.quantity ;
+                            var payButton = $('<a href="/dealer/pay/'+ productAmount+'/'+productName +'/'+ productQuantity+'"><button id="pay" class="btn btn-primary rounded" style="margin-top:-50px;margin-left:110px">Pay</button></a>');
+                            // Add the notification to the corresponding product table
+                            var accepted = $('<p style="color: darkgreen; font-size: 15px; font-weight: bold; font-style: italic; font-family: \'Comic Sans MS\', cursive, sans-serif;">Bit Accepted</p>')
+                            $('#' + productName + '-bit-content').html([accepted, payButton]);    
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX request failed:', status, error);
+                }
+            });
+        }, 1000);
+    </script> 
+</head>
+<body style="background-color:  #E0FFE0;">
+<div style="position:fixed;">
+        {% include 'menudealer.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'dealerheader.html' %}  
+    </div>
+
+    <div class="container mt-5" style="margin-left: 240px;width: 1020px;">
+
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="border: 2px solid black;border-top-left-radius: 12px;border-top-right-radius: 12px;">
+                    <div class="card-header" style="background-color: black;color: white;border-top-left-radius: 10px;border-top-right-radius: 10px; ">
+                        <strong class="card-title">My Bits</strong>
+                    </div>
+                    <div class="card-body" style="background-color: rgb(225, 225, 225);">
+                        <div class="table-responsive" style="background-color: white;">
+                            <table class="table table-striped dataTable no-footer" role="grid"
+                                aria-describedby="{{ product }}-data-table_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting" style="width: 200px;">Product</th>
+                                        <th class="sorting" style="width: 200px;">Farmer</th>
+                                        <th class="sorting" style="width: 200px;">Product</th>
+                                        <th class="sorting" style="width: 120px;">Quantity</th>
+                                        <th class="sorting" style="width: 148px;">Rate</th>
+                                        <th class="sorting" style="width: 121px;">Quality</th>
+                                        <th class="sorting" style="width: 100px; padding-left: 10px;">Bit</th>
+                                        <th class="sorting" style="width: 200px; padding-left: 10px;">Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in bit_data %}
+                                    <tr role="row" class="odd">
+                                        <td>{{ data.product }}</td>
+                                        <td>{{ data.farmer }}</td>
+                                        <td>{{ data.product_type }}</td>
+                                        <td>{{ data.quality }}</td>
+                                        <td>{{ data.rate }}</td>
+                                        <td>{{ data.quantity }}</td>
+                                        <td>{{ data.bit_value }} Rs</td>
+                                        <td width="100px"> 
+                                            <div id="{{ data.product }}-bit-content">
+                                                <p class="bg-primary rounded text-white p-2">Bit</p>
+                                            </div>
+                                        </td>    
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="8">No bits available</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-left: 218px;">   
+        {% include 'dealerfooter.html' %}
+    </div>
+

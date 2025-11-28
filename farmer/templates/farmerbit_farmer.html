@@ -1,0 +1,101 @@
+ <head>
+        <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+    </head>
+ <body  style="background-color:  #E0FFE0;">    
+     <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: 0px;">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="border: 2px solid black;border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="card-header text-white" style="background-color: rgb(10, 63, 79);">
+                        <strong class="card-title" style="font-family: Comic MS,cursive,sans-serif;">Bits On My Products</strong>
+                    </div>
+
+                {% for product, bits in bit.items %}
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <strong class="card-title">{{ product }}</strong>
+                    </div>
+                    <div class="card-body mt-5">
+                        <div class="table-responsive">
+                            <table class="table table-striped dataTable no-footer" role="grid" aria-describedby="{{ product }}-data-table_info">
+                                <thead class="bg-info">
+                                    <tr role="row">
+                                        <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif;">Product Name</th>
+                                        <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif;">Dealer Name</th>
+                                        <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif;">Product Type</th>
+                                        <th class="sorting" style="width: 205px;font-family: Comic MS,cursive,sans-serif;">Quantity</th>
+                                        <th class="sorting" style="width: 148px;font-family: Comic MS,cursive,sans-serif;">Rate</th>
+                                        <th class="sorting" style="width: 121px;font-family: Comic MS,cursive,sans-serif;">Quality</th>
+                                        <th class="sorting" style="width: 100px;font-family: Comic MS,cursive,sans-serif; padding-left: 10px;">Bit</th>
+                                        <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif; padding-left: 10px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in bits %}
+                                    <tr role="row" class="odd">
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{ data.product }}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{ data.bitter }}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{ data.product_type }}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{ data.quality }}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{ data.rate }}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{ data.quantity }}</td>
+                                        <td style="font-family: Comic MS,cursive,sans-serif;">{{ data.bit_value }} kg</td>
+                                        <td>
+                                            <form method="post" action="/farmer/accept_bit/{{ data.id }}/">
+                                                {% csrf_token %}
+                                                <a class="accept-button" data-dealerbit-id="{{ data.id }}">
+                                                    <input type="submit" class="form-control bg-success text-white" value="Accept" />
+                                                </a>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="card-body mt-3">
+                <div class="table-responsive">    
+                <table class="table table-striped dataTable no-footer" width="500px" role="grid" aria-describedby="{{ product }}-data-table_info">
+                    <thead class="bg-info">
+                        <tr role="row">
+                            <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif;">Product Name</th>
+                            <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif;">Dealer Name</th>
+                            <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif;">Product Type</th>
+                            <th class="sorting" style="width: 205px;font-family: Comic MS,cursive,sans-serif;">Quantity</th>
+                            <th class="sorting" style="width: 148px;font-family: Comic MS,cursive,sans-serif;">Rate</th>
+                            <th class="sorting" style="width: 121px;font-family: Comic MS,cursive,sans-serif;">Quality</th>
+                            <th class="sorting" style="width: 100px;font-family: Comic MS,cursive,sans-serif; padding-left: 10px;">Bit</th>
+                            <th class="sorting" style="width: 200px;font-family: Comic MS,cursive,sans-serif; padding-left: 10px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody >  
+                            <tr><td colspan="9" style="background-color: lightblue;"><b style="font-family: Comic MS,cursive,sans-serif;">No new bits</b></td></tr>
+                    </tbody>
+                </table>
+                </div>
+                </div>    
+            {% endfor %}
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div>
+</div>
+        <div style="margin-left: 218px;">   
+            {% include 'chat.html' %}
+            {% include 'footer.html' %}
+        <div>
+
+</div>
+</div>
+</body>            

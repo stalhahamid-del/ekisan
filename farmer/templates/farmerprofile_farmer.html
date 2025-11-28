@@ -1,0 +1,279 @@
+{% load static %}
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EKISAN | Farmer </title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+<style>
+  @media only screen and (max-width: 600px) {
+    .subs{
+      width: 360px;
+      margin-left: 10px;
+      font-size: 12px;
+    }
+    table{
+      width: 370px;
+    }
+    .change{
+      width: 360px;
+      margin-left: -8px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .subs{
+      width: 500px; 
+      height: 150px;
+    }
+    table{
+      width: 500px;
+    }
+    .change{
+      width: 360px;
+    }
+    .card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+}
+</style>  
+
+</head>
+
+<body style="background-color:  #E0FFE0;">
+    
+    <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div>
+
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+        <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -50px;">
+
+        <div class="card" style="height: 175px;border-radius: 25px;box-shadow: 0 0 20px gray;">
+            <div class="card-header bg-success text-white" style="border-top-left-radius: 24px;border-top-right-radius: 24px;">  
+              <h3 class="text-center" style="font-weight: bold;">{{profile.name}}</h3> 
+            </div> 
+            <div class="card-body">
+                
+                <div class="row">
+                    <div class="col-md-3">
+                        
+                      <div id="profile-pic-container" style="cursor: pointer;">
+                          {% if not profilepic %}
+                          <img id="profile-pic" src="{% static 'images/profilepic.png' %}" style="margin-left: 20px;margin-top: -50px;width: 150px;height: 150px;border-radius: 70px;" >
+                          {% else %}
+                          <img src="/static/images/frame.jpg" style="margin-left: 20px;margin-top: -50px;width: 150px;height: 150px;border-radius: 200px;">
+                          <img src="/media/{{ profilepic.profilepic }}" style="margin-left: 30px;margin-top: -145px;width: 130px;height: 140px;border-radius: 200px;">
+                          {% endif %}
+                        </div> 
+
+                    </div>
+                    <div class="col-md-9">
+
+                        <table>
+                          <tr>
+                              <td colspan="2"><p style="width: 600px;font-size: 15px;color: black;"><b>Location:</b> {{profile.address}} ,{{profile.city}} ,{{profile.state}}</p></td>
+                          </tr>
+                          <tr>
+                            <td><p style="font-size: 15px;color: black;"><b>Mobile:</b> {{profile.mobile}}</p></td>
+                            </tr>
+                          </table>
+                          
+                          <a href="/farmer/editfarmerprofile/{{profile.id}}/" style="margin-left: 600px;margin-top: -50px;" class="btn btn-success rounded"><b>Edit Profile</b></a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container" style="width: 1000px;height: 200px;">
+      <div class="row">
+        <div class="col-md-6">    
+    
+      <div class="subs bg-white card" style="box-shadow: 0 0 20px gray;height: 280px;margin-top: 5px;margin-left: 100px;width: 575px;border-radius: 25px;">
+       
+        <div class="card-header bg-danger text-white" style="background-color: rgb(13, 13, 65);border-top-left-radius: 24px;border-top-right-radius: 24px;">
+         
+           <h4 class="text-center" style="font-size: 24px;font-weight: bold;">Subscriptions</h4>
+        
+          </div>
+        
+        <div class="plan-details mt-4">
+            <table style="width: 530px;margin-left: 20px;border: 1px solid black;">
+                <thead class="text-dark" style="border: 1px solid black;">
+                <tr style="border: 1px solid black;">
+                    <th style="text-align:ceter;padding: 10px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;">Plan Name</th>
+                    <th style="text-align:ceter;padding: 10px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;">Price</th>
+                    <th style="text-align:ceter;padding: 10px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;">Start Date</th>
+                    <th style="text-align:ceter;padding: 10px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;">Expiration Date</th>
+                </tr>
+                </thead>
+                <tbody>  
+                  {% for subscription in subscription %}
+                  <tr>
+                    <td style="text-align:ceter;padding-left: 12px;padding-top: 3px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;" class="text-dark"><b>{{ subscription.planname | upper }}</b></td>
+                    <td style="text-align:ceter;padding-left: 12px;padding-top: 3px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;" class="text-info"><b>{{ subscription.amount }} Rs</b></td>
+                    <td style="text-align:ceter;padding-left: 12px;padding-top: 3px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;" class="text-success"><b>{{subscription.date}}</b></td>
+                    <td style="text-align:ceter;padding-left: 12px;padding-top: 3px;border: 1px solid black;font-family: 'Comic Sans MS', cursive, sans-serif;" class="text-danger"><b>{{ subscription.expiry_date }}</b></td>
+                  </tr>
+                  {% endfor %} 
+                </tbody> 
+            </table><br>
+
+            
+            <a href="/farmer/extendsubscription/"><button class="btn btn-danger rounded" style="margin-top: 5px;margin-left:10px;"><b>Take or Extend Plan</b></button></a>
+        </div>
+      </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="change sufee-login card d-flex align-content-center flex-wrap" style="box-shadow: 0 0 20px gray;height: auto; width: 350px; margin-top: 5px; margin-left: 225px; border-radius: 25px;">
+              <div class="card-header bg-info" style="border-top-left-radius: 24px; border-top-right-radius: 24px;width: 350px;">
+                  <h4 class="text-center text-white" style="font-size: 24px;"><b>Change Password</b></h4>
+              </div>
+              <div class="card-body">
+                  <form action="/farmer/changepassword/" id="changepasswordform" method="post" class="g-3 needs-validation" novalidate>
+                      {% csrf_token %}
+                      <div class="form-group">
+                          <input type="password" name="current_password" class="form-control" style="border-radius: 10px;" placeholder="Current Password" required minlength="6" maxlength="20">
+                          <div class="valid-feedback">
+                              Looks good!
+                          </div>
+                          <div class="invalid-feedback">
+                              Please enter a password (6-20 characters).
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <input type="password" name="new_password" id="new_password" class="form-control" style="border-radius: 10px;" placeholder="New Password" required minlength="6" maxlength="20">
+                          <div class="valid-feedback">
+                              Looks good!
+                          </div>
+                          <div class="invalid-feedback">
+                              Please enter a password (6-20 characters).
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <input type="password" name="confirm_password" class="form-control" style="border-radius: 10px;" placeholder="Confirm Password" required minlength="6" maxlength="20">
+                          <div class="valid-feedback">
+                              Looks good!
+                          </div>
+                          <div class="invalid-feedback">
+                              Please enter a password (6-20 characters).
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-info rounded" style="margin-left: 75px;"><b>Change Password</b></button>
+                  </form>
+              </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div id="profile-upload-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="image-upload-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="image-upload-modal-label">Upload Profile Picture</h5>
+          <a href="/farmer/farmerprofile/"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button></a>
+        </div>
+        <div class="modal-body">
+          <form action="/farmer/farmerprofilepic/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="file" name="profilepic" class="form-control" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-success rounded">Upload Profile Picture</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+<div style="margin-left: 218px;">   
+    {% include 'chat.html' %}
+    {% include 'footer.html' %}
+<div>
+
+  </div>
+
+<script>
+    document.getElementById('profile-pic-container').addEventListener('click', function() {
+      $('#profile-upload-modal').modal('show');
+    });
+</script>
+
+    <script>
+      (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+      })()
+    </script>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+ 

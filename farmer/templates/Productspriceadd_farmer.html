@@ -1,0 +1,104 @@
+{% load static %}
+<head>
+        <link rel="shortcut icon" href="/static/images/fav.png" id="favicon">
+</head>
+
+<body style="background-color:  #E0FFE0;">    
+     <div style="position:fixed;">
+        {% include 'menu.html' %}
+    </div> 
+    <div style="margin-left: 218px;">   
+        {% include 'header.html' %}  
+    </div>
+
+    <div class="container" style="margin-left: 240px;width: 1020px;margin-top: -40px;">
+
+    <div style="padding-left: 800px;margin-top: 20px;">
+        <a href="javascript:window.history.go(-1);" class="btn btn-primary rounded" style="margin-left: 50px;">Back</a>
+    </div>
+
+    <div class="sufee-login d-flex align-content-center flex-wrap" style="margin-top: -100px;">
+        <div class="container">
+            <div class="login-content"> 
+                <div class="login-form" style="box-shadow: 0 0 20px gray;">
+                    <h4 class="text-dark">Add Products Price </h4><hr style="margin-top: -40px;">
+                        <form id="productspriceadd" action="/farmer/farmeragreement/" method="POST">
+                            {% csrf_token %}
+                            <div class="row form-group">
+                                <div class="col col-md-4">
+                                    <label class=" form-control-label">
+                                    PRODUCT NAME
+                                    </label>
+                                </div>
+
+                                <div class="col-12 col-md-8">
+                                <input type="text" name="product_name" class="form-control" value="{{fruit_name}}"/>
+                                </div>
+                                    
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-4">
+                                    <label class=" form-control-label">
+                                    Product Type
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input name="product_type" type="text" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col col-md-4">
+                                    <label class=" form-control-label">
+                                        Quality
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <select name="quality" class="form-control">
+                                        <option class="form-control">Low</option>
+                                        <option class="form-control">Medium</option>
+                                        <option class="form-control">High</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group">
+                                <div class="col col-md-4">
+                                    <label class=" form-control-label">
+                                        RATE
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="number" name="rate" class="form-control">
+                                </div>
+                            </div>    
+
+                            <div class="row form-group">
+                                <div class="col col-md-4">
+                                    <label class=" form-control-label">
+                                        Quantity
+                                    </label>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <input type="number" name="quantity" class="form-control">
+                                </div>
+                            </div><hr>
+                            <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">ADD</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+     <div style="margin-left: 218px;">   
+            {% include 'chat.html' %}
+            {% include 'footer.html' %}
+        <div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
